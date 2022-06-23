@@ -2,35 +2,34 @@ import React, { useState } from "react";
 
 const Createticket = () => {
     const [ticketName, setTicketName] = useState('');
-    const [useDate, setUseDate] = useState('');
-    const [expireDate, setExpireDate] = useState('');
-    const [singleTicket, setSingleTicket] = useState(true);
-    const [comboTicket, setComboTicket] = useState(false);
+    const [applicableDate, setApplicableDate] = useState('');
+    const [dueDate, setDueDate] = useState('');
+
     return (
         <div className="create_ticket">
             <h1 className="header"> Tạo gói vé</h1>
             <label className="ticketname-label">Tên gói vé</label>
             <input className="ticketname-input" placeholder="Ticket name" onChange={(e: any) => { setTicketName(e.target.value) }} />
 
-            <label className="dateuse-label">Ngày áp dụng</label>
-            <input className="dateuse-input" type="date" onChange={(e: any) => { setUseDate(e.target.value) }} />
-            <input className="dateuse-time" type="time" onChange={(e: any) => { setUseDate(e.target.value) }} />
+            <label className="applicabledate-label">Ngày áp dụng</label>
+            <input className="applicabledate-input" type="date" onChange={(e: any) => { setApplicableDate(e.target.value) }} />
+            <input className="applicabledate-time" type="time" onChange={(e: any) => { setApplicableDate(e.target.value) }} />
 
-            <label className="expiredate-label">Ngày hết hạn</label>
-            <input className="expiredate-input" type="date" onChange={(e: any) => { setExpireDate(e.target.value) }} />
-            <input className="expiredate-time" type="time" onChange={(e: any) => { setExpireDate(e.target.value) }} />
+            <label className="duedate-label">Ngày hết hạn</label>
+            <input className="duedate-input" type="date" onChange={(e: any) => { setDueDate(e.target.value) }} />
+            <input className="duedate-time" type="time" onChange={(e: any) => { setDueDate(e.target.value) }} />
 
-            <label className="price-label">Gía vé áp dụng</label>
-            <div className="single-ticket">
+            <label className="price-label">Giá vé áp dụng</label>
+            <div className="singleticket">
                 <input type="checkbox" checked />
                 <label>Vé lẻ (vnđ/vé) với giá</label>
-                <input className="single-ticket-input" type="number" />
+                <input className="singleticket-input" type="number" />
                 <label>/ vé</label>
             </div>
-            <div className="combo-ticket">
+            <div className="comboticket">
                 <input type="checkbox" checked />
-                <label className="combo-ticket-label">Combo vé với giá</label>
-                <input className="combo-ticket-input" type="number" />
+                <label className="comboticket-label">Combo vé với giá</label>
+                <input className="comboticket-input" type="number" />
                 <label>/ vé</label>
             </div>
 

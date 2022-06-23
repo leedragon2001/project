@@ -1,8 +1,10 @@
 import React from 'react'
+import LineChart from './linechart'
+import PieChart from './piechart'
 
-const Home =()=>{
-    return(
-        <div>Home</div>
+const Home = () => {
+    return (
+        <div><LineChart /> <PieChart /></div>
     )
 }
 

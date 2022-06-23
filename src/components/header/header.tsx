@@ -8,6 +8,7 @@ import Checkticket from '../../pages/check/checkticket';
 import Home from '../../pages/home/home';
 import Ticketmanagement from '../../pages/manage/ticketmanagement';
 import Service from '../../pages/service/service';
+import Createticket from '../../pages/service/createticket';
 
 const Header = () => {
   return (
@@ -22,6 +23,7 @@ const Header = () => {
           <Route path="/ticket-manage" element={<Ticketmanagement />} />
           <Route path="/check-tickets" element={<Checkticket />} />
           <Route path="/setting/service" element={<Service />} />
+          <Route path="/createticket" element={<Createticket />} />
         </Routes>
       </div>
     </div>

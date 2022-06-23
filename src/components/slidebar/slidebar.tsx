@@ -2,7 +2,10 @@ import React from 'react';
 import './slidebar.scss';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
-
+import home from '../../assets/home.png'
+import tickets from '../../assets/tickets.png'
+import ticket from '../../assets/ticket.png'
+import setting from '../../assets/setting.png'
 const Slidebar = () => {
   return (
     <div className="slidebar-container">
@@ -13,25 +16,21 @@ const Slidebar = () => {
         <ul>
           <li>
             <NavLink to="/">
-              <i className="fas fa-home"></i>
               Home
             </NavLink>
           </li>
           <li>
             <NavLink to="/ticket-manage">
-              <i className="fas fa-ticket-alt"></i>
               Ticket Management
             </NavLink>
           </li>
           <li>
             <NavLink to="/check-tickets">
-              <i className="fas fa-bars"></i>
               Check Ticket
             </NavLink>
           </li>
           <li>
             <NavLink to="/setting/service">
-              <i className="fas fa-cog"></i>
               Setting
             </NavLink>
             <ul className="menu">
