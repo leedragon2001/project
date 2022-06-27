@@ -1,0 +1,206 @@
+.filter-ticket {
+  box-sizing: border-box;
+  position: relative;
+  width: 634px;
+  height: 454px;
+  margin: auto;
+  margin-top: 10%;
+  margin-left: 50%;
+
+  background: #ffffff;
+  border: 0px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+.filter-header {
+  position: absolute;
+  width: 81px;
+  height: 30px;
+  left: 263px;
+  top: 24px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+
+  display: flex;
+  align-items: center;
+  color: #1e0d03;
+}
+.filter-fromdate-label {
+  position: absolute;
+  width: 66px;
+  height: 26px;
+  left: 32px;
+  top: 81px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.filter-fromdate-input {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 143px;
+  height: 40px;
+  left: 32px;
+  top: 112px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.filter-todate-label {
+  position: absolute;
+  width: 128px;
+  height: 26px;
+  left: 297px;
+  top: 80px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.filter-todate-input {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 143px;
+  height: 40px;
+  left: 297px;
+  top: 112px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.filter-status-text {
+  position: absolute;
+  width: 159px;
+  height: 26px;
+  left: 32px;
+  top: 172px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.filter-status {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  position: absolute;
+  width: 573px;
+  height: 24px;
+  left: 32px;
+  top: 203px;
+}
+.filter-checkin-gate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+
+  position: absolute;
+  width: 100%;
+  height: 24px;
+  left: 32px;
+  top: 281px;
+}
+.filter-button {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  background: #ffffff;
+  font-weight: 600;
+  color: #ff993c;
+  position: absolute;
+  width: 160px;
+  height: 48px;
+  left: 45px;
+  bottom: 23px;
+
+  border: 2px solid #ff993c;
+  border-radius: 8px;
+}
+.filter-checkin-label {
+  position: absolute;
+  width: 131px;
+  height: 26px;
+  left: 32px;
+  top: 247px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.filter-button-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 344px;
+  height: 48px;
+  left: 207px;
+  bottom: 32px;
+}

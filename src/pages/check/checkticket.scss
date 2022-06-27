@@ -1,0 +1,304 @@
+.checkticket-list {
+  position: absolute;
+  width: 1097px;
+  height: 963px;
+  left: 321px;
+  top: 85px;
+
+  background: #ffffff;
+  border-radius: 24px;
+}
+.checkticket-body-right {
+  position: absolute;
+  width: 446px;
+  height: 963px;
+  left: 1442px;
+  top: 85px;
+
+  background: #ffffff;
+  border-radius: 24px;
+}
+.checkticket-doisoat {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  border: 0px;
+  position: absolute;
+  width: 174px;
+  height: 48px;
+  right: 24px;
+  top: 110px;
+  color: #ffffff;
+  font-weight: 600;
+
+  background: #ff993c;
+  border-radius: 8px;
+}
+.checkticket-title {
+  position: absolute;
+  width: 276px;
+  height: 64px;
+  left: 24px;
+  top: 24px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 54px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+}
+.checkticket-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 16px;
+
+  border: 0px;
+  position: absolute;
+  width: 446px;
+  height: 30px;
+  left: 24px;
+  top: 120px;
+
+  background: url(../../assets/search.png) no-repeat scroll 440px 13px;
+  font-size: 19px;
+  background-color: #f7f7f8;
+  border-radius: 8px;
+}
+.checkticket-body-table {
+  position: absolute;
+  width: 1049px;
+  height: 48px;
+  left: 24px;
+  top: 200px;
+
+  background: #f1f4f8;
+  border-radius: 8px 8px 0px 0px;
+}
+.checkticket-table-heading {
+  width: 1049px;
+  height: 48px;
+
+  background: #f1f4f8;
+  border-radius: 8px 8px 0px 0px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.checkticket-table-content {
+  width: 1049px;
+  height: 48px;
+
+  background: #ffffff;
+  text-align: center;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.checkticket-filter {
+  position: absolute;
+  width: 156px;
+  height: 26px;
+  left: 24px;
+  top: 84px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.checkticket-filter-heading {
+  position: absolute;
+  width: 81px;
+  height: 30px;
+  left: 24px;
+  top: 22px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+}
+.checkticket-filter-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  position: absolute;
+  width: 144px;
+  height: 96px;
+  left: 206px;
+  top: 85px;
+}
+.checkticket-ticket-type-filter-label {
+  position: absolute;
+  width: 58px;
+  height: 26px;
+  left: 24px;
+  top: 205px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.checkticket-ticket-type-filter-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+
+  position: absolute;
+  width: 66px;
+  height: 20px;
+  left: 206px;
+  top: 190px;
+}
+.checkticket-fromdate-filter-label {
+  position: absolute;
+  width: 66px;
+  height: 26px;
+  left: 24px;
+  top: 255px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.checkticket-fromdate-filter-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 28px;
+
+  position: absolute;
+  width: 150px;
+  height: 26px;
+  left: 206px;
+  top: 250px;
+
+  /* Grey/3 */
+
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+.checkticket-todate-filter-label {
+  position: absolute;
+  width: 80px;
+  height: 26px;
+  left: 24px;
+  top: 321px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.8;
+}
+.checkticket-todate-filter-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 27px;
+
+  position: absolute;
+  width: 150px;
+  height: 26px;
+  left: 206px;
+  top: 314px;
+
+  background: #f7f8fb;
+  border-radius: 8px;
+}
+
+.checkticket-filter-button {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  font-size: 18px;
+  background-color: #ffffff;
+  color: #ff993c;
+
+  font-weight: 700;
+
+  line-height: 26px;
+
+  position: absolute;
+  width: 160px;
+  height: 48px;
+  left: 136px;
+  top: 386px;
+
+  border: 2px solid #ff993c;
+  border-radius: 8px;
+}
+.checkticket-radio-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+
+  width: 100%;
+  height: 24px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}

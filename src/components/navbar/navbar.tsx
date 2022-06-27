@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div>
       <div className='nav-container'>
-        <div className='search'>
+        <div className='search-top'>
           <input type='text' placeholder='Search' />
           <img src={search} alt="search" />
         </div>

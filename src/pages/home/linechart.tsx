@@ -1,60 +1,34 @@
-import { Line } from "react-chartjs-2";
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
-
-const data = {
-    labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
-    datasets: [
-        {
-            label: 'Doanh Thu',
-            data: [100, 200, 150, 240, 190, 220, 250],
-            fill: true,
-            backgroundColor: "#FFFFFF",
-            pointBorderColor: "#FF993C",
-            pointBorderWidth: 0,
-            pointRadius: 0,
-            tension: 0.6,
-            borderColor: "#FF993C"
-        },
-    ],
-};
-
-const options = {
-    plugins: { legend: { display: false } },
-    layout: { padding: { bottom: 420 } },
-    scales: {
-        y: {
-            ticks: {
-                color: "#888888",
-                font: {
-                    size: 18
-                }
-            },
-            grid: {
-                color: "#ECE9F1"
-            }
-        },
-        x: {
-            ticks: {
-                color: "#888888",
-                font: {
-                    size: 18
-                }
-            },
-            grid: {
-                color: "#FFFFFF"
-            }
-        }
-    },
-};
+import { Area } from '@ant-design/plots';
 
 const LineChart = () => {
-    return (
-        <div className="LineChart">
-            <h2>Doanh Thu</h2>
-            <Line data={data} options={options} />
-        </div>
-    );
-}
+    const dataValue = [
+        { day: 'Thứ 2', value: 150 },
+        { day: 'Thứ 3', value: 130 },
+        { day: 'Thứ 4', value: 180 },
+        { day: 'Thứ 5', value: 260 },
+        { day: 'Thứ 6', value: 250 },
+        { day: 'Thứ 7', value: 280 },
+        { day: 'CN', value: 350 },
+    ];
+
+    const config = {
+        data: dataValue,
+        xField: 'day',
+        yField: 'value',
+        color: '#FAA05F',
+        xAxis: {
+            range: [0, 1],
+        },
+        yAxis: {
+            range: [0, 1],
+        },
+        areaStyle: {
+            fill: 'l(270) 0:#ffffff 1:#FAA05F',
+        },
+        smooth: true,
+    };
+
+    return <Area {...config} />;
+};
 
 export default LineChart;

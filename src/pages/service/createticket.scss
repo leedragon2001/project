@@ -1,0 +1,375 @@
+.create-header {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  left: 30%;
+  top: 24px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+}
+.create-ticket {
+  box-sizing: border-box;
+
+  position: relative;
+  width: 758px;
+  height: 628px;
+  margin: auto;
+  margin-top: 10%;
+  margin-left: 50%;
+
+  background: #ffffff;
+  border: 0px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+.create-ticketname-label {
+  position: absolute;
+  width: 103px;
+  height: 26px;
+  left: 32px;
+  top: 81px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.create-ticketname-input {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 367px;
+  height: 40px;
+  left: 32px;
+  top: 112px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+
+.create-applicabledate-label {
+  position: absolute;
+  width: 117px;
+  height: 26px;
+  left: 32px;
+  top: 177px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.create-applicabledate-input {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 142px;
+  height: 40px;
+  left: 32px;
+  top: 208px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.create-applicabledate-time {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 137px;
+  height: 40px;
+  left: 183px;
+  top: 208px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.create-duedate-label {
+  position: absolute;
+  width: 128px;
+  height: 26px;
+  left: 359px;
+  top: 176px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.create-duedate-input {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 142px;
+  height: 40px;
+  left: 359px;
+  top: 208px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.create-duedate-time {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 142px;
+  height: 40px;
+  left: 532px;
+  top: 208px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+.create-price-label {
+  position: absolute;
+  width: 124px;
+  height: 26px;
+  left: 32px;
+  top: 272px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.create-singleticket {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 391px;
+  height: 40px;
+  left: 32px;
+  top: 303px;
+}
+.create-comboticket {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 449px;
+  height: 40px;
+  left: 32px;
+  top: 355px;
+}
+.create-singleticket-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 12px;
+  gap: 10px;
+  border: 0px;
+  width: 100px;
+  height: 16px;
+
+  background: #f1f4f8;
+  border-radius: 8px;
+
+  //   flex: none;
+  //   order: 2;
+  //   flex-grow: 0;
+}
+.create-comboticket-input-giave {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 12px;
+  gap: 10px;
+
+  width: 100px;
+  height: 16px;
+  border: 0px;
+  background: #f1f4f8;
+  border-radius: 8px;
+
+  //   flex: none;
+  //   order: 2;
+  //   flex-grow: 0;
+}
+.create-comboticket-input-sove {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 12px;
+  gap: 10px;
+
+  width: 100px;
+  height: 16px;
+  border: 0px;
+  background: #f1f4f8;
+  border-radius: 8px;
+
+  //   flex: none;
+  //   order: 2;
+  //   flex-grow: 0;
+}
+.create-label-status {
+  position: absolute;
+  width: 94px;
+  height: 26px;
+  left: 32px;
+  top: 419px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.create-status {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+
+  position: absolute;
+  width: 176px;
+  height: 40px;
+  left: 32px;
+  top: 450px;
+
+  border: 1px solid #a5a8b1;
+  border-radius: 8px;
+}
+
+.create-huy {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  font-weight: 600;
+  color: #ff993c;
+  width: 160px;
+  height: 48px;
+  font-size: 16px;
+  border: 2.5px solid #ff993c;
+  border-radius: 8px;
+  background: #ffffff;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.create-luu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  border: 0px;
+  width: 160px;
+  height: 48px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  background: #ff993c;
+  border-radius: 8px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.create-button-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 344px;
+  height: 48px;
+  left: 207px;
+  bottom: 32px;
+}
