@@ -1,4 +1,3 @@
-import React from 'react'
 import './navbar.scss'
 import avatar from '../../assets/avatar.png';
 import bell from '../../assets/bell.png';

@@ -1,4 +1,3 @@
-import React from 'react';
 import './slidebar.scss';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
@@ -16,21 +15,25 @@ const Slidebar = () => {
         <ul>
           <li>
             <NavLink to="/">
+              <img className="icon" src={home} alt="home" />
               Home
             </NavLink>
           </li>
           <li>
             <NavLink to="/ticket-manage">
+              <img className="icon" src={ticket} alt="ticket" />
               Ticket Management
             </NavLink>
           </li>
           <li>
             <NavLink to="/check-tickets">
+              <img className="icon" src={tickets} alt="tickets" />
               Check Ticket
             </NavLink>
           </li>
           <li>
-            <NavLink to="/setting/service">
+            <NavLink to="/setting">
+              <img className="icon-setting" src={setting} alt="setting" />
               Setting
             </NavLink>
             <ul className="menu">

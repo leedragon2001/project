@@ -1,106 +1,38 @@
-import * as React from 'react';
-import Badge from '@mui/material/Badge';
-import TextField from '@mui/material/TextField';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { CalendarPickerSkeleton } from '@mui/x-date-pickers/CalendarPickerSkeleton';
-import getDaysInMonth from 'date-fns/getDaysInMonth';
+import { DatePicker, DatePickerProps, Radio, RadioChangeEvent } from 'antd';
+import React, { useState } from 'react';
+import 'antd/dist/antd.css';
+import './celendar.scss'
 
-function getRandomNumber(min: number, max: number) {
-    return Math.round(Math.random() * (max - min) + min);
-}
+type PickerType = "time" | "date" | "week" | "month" | "quarter" | "year" | undefined
 
-
-function fakeFetch(date: Date, { signal }: { signal: AbortSignal }) {
-    return new Promise<{ daysToHighlight: number[] }>((resolve, reject) => {
-        const timeout = setTimeout(() => {
-            const daysInMonth = getDaysInMonth(date);
-            const daysToHighlight = [1, 2, 3].map(() => getRandomNumber(1, daysInMonth));
-
-            resolve({ daysToHighlight });
-        }, 500);
-
-        signal.onabort = () => {
-            clearTimeout(timeout);
-            reject(new DOMException('aborted', 'AbortError'));
-        };
-    });
-}
-
-const initialValue = new Date();
-
-export default function Celendar() {
-    const requestAbortController = React.useRef<AbortController | null>(null);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
-    const [value, setValue] = React.useState<Date | null>(initialValue);
-
-    const fetchHighlightedDays = (date: Date) => {
-        const controller = new AbortController();
-        fakeFetch(date, {
-            signal: controller.signal,
-        })
-            .then(({ daysToHighlight }) => {
-                setHighlightedDays(daysToHighlight);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                // ignore the error if it's caused by `controller.abort`
-                if (error.name !== 'AbortError') {
-                    throw error;
-                }
-            });
-
-        requestAbortController.current = controller;
+const Celendar = ({ format = "MM/YYYY" }) => {
+    const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+        console.log(date, dateString);
     };
+    const [value, setValue] = useState<PickerType>("date");
 
-    React.useEffect(() => {
-        fetchHighlightedDays(initialValue);
-        // abort request on unmount
-        return () => requestAbortController.current?.abort();
-    }, []);
-
-    const handleMonthChange = (date: Date) => {
-        if (requestAbortController.current) {
-            // make sure that you are aborting useless requests
-            // because it is possible to switch between months pretty quickly
-            requestAbortController.current.abort();
-        }
-
-        setIsLoading(true);
-        setHighlightedDays([]);
-        fetchHighlightedDays(date);
+    const onChangePickerType = (e: RadioChangeEvent) => {
+        console.log("radio checked", e.target.value);
+        setValue(e.target.value);
     };
-
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <div>
+            {/* <DatePicker onChange={onChange} picker="date" /> */}
             <DatePicker
-                value={value}
-                loading={isLoading}
-                onChange={(newValue) => {
-                    setValue(newValue);
-                }}
-                onMonthChange={handleMonthChange}
-                renderInput={(params) => <TextField {...params} />}
-                renderLoading={() => <CalendarPickerSkeleton />}
-                renderDay={(day, _value, DayComponentProps) => {
-                    const isSelected =
-                        !DayComponentProps.outsideCurrentMonth &&
-                        highlightedDays.indexOf(day.getDate()) > 0;
-
-                    return (
-                        <Badge
-                            key={day.toString()}
-                            overlap="circular"
-                            badgeContent={isSelected ? '🌚' : undefined}
-                        >
-                            <PickersDay {...DayComponentProps} />
-                        </Badge>
-                    );
-                }}
+                showToday={value !== undefined ? false : undefined}
+                picker={value}
+                placeholder="dd/mm/yy"
+                onChange={onChange}
+                format={format}
+                renderExtraFooter={() => (
+                    <Radio.Group className="flex justify-center my-3" onChange={onChangePickerType} value={value}>
+                        <Radio value="date">Theo ngày</Radio>
+                        <Radio value="week">Theo tuần</Radio>
+                    </Radio.Group>
+                )}
             />
-        </LocalizationProvider>
-    );
-}
+        </div>
+    )
+};
+
+export default Celendar;

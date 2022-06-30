@@ -49,8 +49,8 @@ const Updateticket = () => {
 
 
             <div className="update-button-holder">
-                <button className="huy">Hủy</button>
-                <button className="luu">Lưu</button>
+                <button className="update-cancle">Hủy</button>
+                <button className="update-save">Lưu</button>
             </div>
 
         </div>

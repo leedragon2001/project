@@ -1,0 +1,28 @@
+.ant-picker-suffix {
+  display: flex;
+  flex: none;
+  align-self: center;
+  margin-left: 4px;
+  color: #ff993c;
+  line-height: 1;
+  pointer-events: none;
+}
+.ant-picker {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+  padding: 4px 11px 4px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  transition: border 0.3s, box-shadow 0.3s;
+}

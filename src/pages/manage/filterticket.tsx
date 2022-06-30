@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Gates } from "./gate";
 import './filterticket.scss'
+import { Modal } from "antd";
+import Celendar from '../home/celendar'
 
-const FilterTicket = () => {
+
+const FilterTicket = ({ openModal, setOpenModal }: any) => {
+    // const FilterTicket = () => {
     const [applicableDate, setApplicableDate] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [checkAll, setCheckAll] = useState(false);
@@ -33,62 +37,79 @@ const FilterTicket = () => {
     const onChangeValue = (event: any) => {
         setSelectedOption(event.target.value);
     }
-    console.log(check);
+
+    const handleOk = () => {
+        setOpenModal(false);
+    };
+    const handleCancel = () => setOpenModal(false);
 
 
     return (
-        <div className="filter-ticket">
-            <h1 className="filter-header">Lọc vé</h1>
+        <Modal
+            centered
+            closable={false}
+            footer={null}
+            title="Lọc vé"
+            visible={openModal}
+            onCancel={handleCancel}
+            width={600}
+        >
+            <div className="filter-ticket">
 
-            <label className="filter-fromdate-label">Từ ngày</label>
-            <input className="filter-fromdate-input" type="date" onChange={(e: any) => { setApplicableDate(e.target.value) }} />
+                <h1 className="filter-header">Lọc vé</h1>
 
-            <label className="filter-todate-label">Đến ngày</label>
-            <input className="filter-todate-input" type="date" onChange={(e: any) => { setDueDate(e.target.value) }} />
+                <label className="filter-fromdate-label">Từ ngày</label>
+                <input className="filter-fromdate-input" type="date" onChange={(e: any) => { setApplicableDate(e.target.value) }} />
 
-            <label className="filter-status-text">Tình trạng sử dụng</label>
-            <div className="filter-status">
+                <label className="filter-todate-label">Đến ngày</label>
+                <input className="filter-todate-input" type="date" onChange={(e: any) => { setDueDate(e.target.value) }} />
 
-                <input id="tất cả" type="radio" value="Tất cả" name="status" checked={selectedOption === "Tất cả"} onChange={onChangeValue} />
-                <label htmlFor="tất cả">Tất cả</label>
 
-                <input id="đã sử dụng" type="radio" value="Đã sử dụng" name="status" checked={selectedOption === "Đã sử dụng"} onChange={onChangeValue} />
-                <label htmlFor="đã sử dụng">Đã sử dụng</label>
+                <label className="filter-status-text">Tình trạng sử dụng</label>
+                <div className="filter-status">
 
-                <input id="chưa sử dụng" type="radio" value="Chưa sử dụng" name="status" checked={selectedOption === "Chưa sử dụng"} onChange={onChangeValue} />
-                <label htmlFor="chưa sử dụng">Chưa sử dụng</label>
+                    <input id="tất cả" type="radio" value="Tất cả" name="status" checked={selectedOption === "Tất cả"} onChange={onChangeValue} />
+                    <label htmlFor="tất cả">Tất cả</label>
 
-                <input id="hết hạn" type="radio" value="Hết hạn" name="status" checked={selectedOption === "Hết hạn"} onChange={onChangeValue} />
-                <label htmlFor="hết hạn">Hết hạn</label>
+                    <input id="đã sử dụng" type="radio" value="Đã sử dụng" name="status" checked={selectedOption === "Đã sử dụng"} onChange={onChangeValue} />
+                    <label htmlFor="đã sử dụng">Đã sử dụng</label>
+
+                    <input id="chưa sử dụng" type="radio" value="Chưa sử dụng" name="status" checked={selectedOption === "Chưa sử dụng"} onChange={onChangeValue} />
+                    <label htmlFor="chưa sử dụng">Chưa sử dụng</label>
+
+                    <input id="hết hạn" type="radio" value="Hết hạn" name="status" checked={selectedOption === "Hết hạn"} onChange={onChangeValue} />
+                    <label htmlFor="hết hạn">Hết hạn</label>
+                </div>
+
+                <label className="filter-checkin-label">Cổng check-in</label>
+                <div className="filter-checkin-gate">
+                    {/* <input type="checkbox" className="check-all" name="Tất cả" value="Tất cả"/> */}
+                    <input type="checkbox"
+                        name="selectAll"
+                        id="selectAll"
+                        onChange={handleSelectAll}
+                        checked={checkAll} />
+                    <label htmlFor="selectAll">Tất cả</label>
+                    <input type="checkbox" id="gate-1" name="Cổng 1" value="Cổng 1" onChange={handleClick} checked={check.includes("gate-1")} />
+                    <label htmlFor="gate-1">Cổng 1</label>
+                    <input type="checkbox" id="gate-2" name="Cổng 2" value="Cổng 2" onChange={handleClick} checked={check.includes("gate-2")} />
+                    <label htmlFor="gate-2">Cổng 2</label>
+                    <input type="checkbox" id="gate-3" name="Cổng 3" value="Cổng 3" onChange={handleClick} checked={check.includes("gate-3")} />
+                    <label htmlFor="gate-3">Cổng 3</label>
+                    <input type="checkbox" id="gate-4" name="Cổng 4" value="Cổng 4" onChange={handleClick} checked={check.includes("gate-4")} />
+                    <label htmlFor="gate-4">Cổng 4</label>
+                    <input type="checkbox" id="gate-5" name="Cổng 5" value="Cổng 5" onChange={handleClick} checked={check.includes("gate-5")} />
+                    <label htmlFor="gate-5">Cổng 5</label>
+                </div>
+
+
+                <div className="filter-button-holder">
+                    <button className="filter-button">Lọc</button>
+                </div>
+
             </div>
-
-            <label className="filter-checkin-label">Cổng check-in</label>
-            <div className="filter-checkin-gate">
-                {/* <input type="checkbox" className="check-all" name="Tất cả" value="Tất cả"/> */}
-                <input type="checkbox"
-                    name="selectAll"
-                    id="selectAll"
-                    onChange={handleSelectAll}
-                    checked={checkAll} />
-                <label htmlFor="selectAll">Tất cả</label>
-                <input type="checkbox" id="gate-1" name="Cổng 1" value="Cổng 1" onChange={handleClick} checked={check.includes("gate-1")} />
-                <label htmlFor="gate-1">Cổng 1</label>
-                <input type="checkbox" id="gate-2" name="Cổng 2" value="Cổng 2" onChange={handleClick} checked={check.includes("gate-2")} />
-                <label htmlFor="gate-2">Cổng 2</label>
-                <input type="checkbox" id="gate-3" name="Cổng 3" value="Cổng 3" onChange={handleClick} checked={check.includes("gate-3")} />
-                <label htmlFor="gate-3">Cổng 3</label>
-                <input type="checkbox" id="gate-4" name="Cổng 4" value="Cổng 4" onChange={handleClick} checked={check.includes("gate-4")} />
-                <label htmlFor="gate-4">Cổng 4</label>
-                <input type="checkbox" id="gate-5" name="Cổng 5" value="Cổng 5" onChange={handleClick} checked={check.includes("gate-5")} />
-                <label htmlFor="gate-5">Cổng 5</label>
-            </div>
-
-
-            <div className="filter-button-holder">
-                <button className="filter-button">Lọc</button>
-            </div>
-
-        </div>
-    );
+        </Modal>
+    )
+        ;
 }
 export default FilterTicket;

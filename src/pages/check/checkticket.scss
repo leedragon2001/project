@@ -1,7 +1,13 @@
+.checkticket-container {
+  position: relative;
+  left: -290px;
+  top: -70px;
+}
+
 .checkticket-list {
   position: absolute;
   width: 1097px;
-  height: 963px;
+  height: 870px;
   left: 321px;
   top: 85px;
 
@@ -11,7 +17,7 @@
 .checkticket-body-right {
   position: absolute;
   width: 446px;
-  height: 963px;
+  height: 870px;
   left: 1442px;
   top: 85px;
 
@@ -64,8 +70,8 @@
 
   border: 0px;
   position: absolute;
-  width: 446px;
-  height: 30px;
+  width: 480px;
+  height: 50px;
   left: 24px;
   top: 120px;
 
@@ -187,7 +193,7 @@
   width: 66px;
   height: 20px;
   left: 206px;
-  top: 190px;
+  top: 207px;
 }
 .checkticket-fromdate-filter-label {
   position: absolute;
@@ -218,15 +224,15 @@
   gap: 28px;
 
   position: absolute;
-  width: 150px;
+  width: 200px;
   height: 26px;
-  left: 206px;
-  top: 250px;
+  left: 195px;
+  top: 254px;
 
-  /* Grey/3 */
+  // /* Grey/3 */
 
-  background: #e0e0e0;
-  border-radius: 8px;
+  // // background: #e0e0e0;
+  // border-radius: 8px;
 }
 .checkticket-todate-filter-label {
   position: absolute;
@@ -256,13 +262,13 @@
   gap: 27px;
 
   position: absolute;
-  width: 150px;
+  width: 200px;
   height: 26px;
-  left: 206px;
-  top: 314px;
+  left: 195px;
+  top: 320px;
 
-  background: #f7f8fb;
-  border-radius: 8px;
+  // background: #f7f8fb;
+  // border-radius: 20px;
 }
 
 .checkticket-filter-button {
@@ -301,4 +307,7 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+.hidden {
+  visibility: hidden;
 }
