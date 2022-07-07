@@ -177,14 +177,14 @@ const Checkticket = () => {
                     <label className="checkticket-fromdate-filter-label">Từ ngày</label>
                     {/* <input className="checkticket-fromdate-filter-input" type="date" /> */}
                     <div className="checkticket-fromdate-filter-input">
-                        <Celendar format="dd/mm/yy" />
+                        <Celendar format="DD/MM/YY" />
                     </div>
                 </div>
                 <div>
                     <label className="checkticket-todate-filter-label">Đến ngày</label>
                     {/* <input className="checkticket-todate-filter-input" type="date" /> */}
                     <div className="checkticket-todate-filter-input">
-                        <Celendar format="dd/mm/yy" />
+                        <Celendar format="DD/MM/YY" />
                     </div>
                 </div>
 

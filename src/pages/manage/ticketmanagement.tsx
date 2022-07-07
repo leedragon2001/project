@@ -10,7 +10,14 @@ import red from '../../assets/red.png'
 import blue from '../../assets/blue.png'
 import { Typography } from '@material-ui/core';
 import FilterTicket from "./filterticket";
-
+import more from '../../assets/more.png';
+import ChangeTicket from './changeticket';
+// import BootstrapTable from 'react-bootstrap-table-next';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import { Space, Table, Tag } from 'antd';
+import type { ColumnsType } from 'antd/lib/table';
+import { Pagination } from "../pagination";
 
 interface Ticket {
     ticket: {
@@ -28,6 +35,7 @@ interface Ticket {
 const Ticketmanagement = () => {
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState("");
     const [result, setResult] = useState<Ticket["ticket"]>([]);
     const [tickets, setTickets] = useState<Ticket["ticket"]>([]);
@@ -109,6 +117,89 @@ const Ticketmanagement = () => {
         setOpenModal(true);
     }
 
+    const Change = () => {
+        setShowModal(true);
+    }
+
+    // const columns: ColumnsType<Ticket> = [
+    //     {
+    //         title: 'STT',
+    //         dataIndex: 'stt',
+    //         key: 'stt',
+    //     },
+    //     {
+    //         title: 'id',
+    //         dataIndex: 'id',
+    //         key: 'id',
+    //     },
+    //     {
+    //         title: 'Số vé',
+    //         dataIndex: 'sove',
+    //         key: 'sove',
+    //     },
+    //     {
+    //         title: 'Tên sự kiện',
+    //         dataIndex: 'tensukien',
+    //         key: 'tensukien',
+    //     },
+    //     {
+    //         title: 'Tình trạng sử dụng',
+    //         key: 'tinhtrangsudung',
+    //         dataIndex: 'tinhtrangsudung',
+    //         render: (_, { tinhtrangsudung }) => (
+    //             <>
+    //                 {tinhtrangsudung.map((ticket: any) => {
+    //                     let color = ticket.length > 5 ? 'geekblue' : 'green';
+    //                     if (ticket === 'loser') {
+    //                         color = 'volcano';
+    //                     }
+    //                     return (
+    //                         <Tag color={color} key={ticket}>
+    //                             {ticket.toUpperCase()}
+    //                         </Tag>
+    //                     );
+    //                 })}
+    //             </>
+    //         ),
+    //     },
+    //     {
+    //         title: 'Ngày sử dụng',
+    //         dataIndex: 'ngaysudung',
+    //         key: 'ngaysudung',
+    //     },
+    //     {
+    //         title: 'Ngày xuất vé',
+    //         dataIndex: 'ngayxuatve',
+    //         key: 'ngayxuatve',
+    //     },
+    //     {
+    //         title: 'Cổng check-in',
+    //         dataIndex: 'congcheckin',
+    //         key: 'congcheckin',
+    //     },
+    // {
+    //     title: 'Action',
+    //     key: 'action',
+    //     render: (_, record) => (
+    //         <Space size="middle">
+    //             <a>Invite {record.name}</a>
+    //             <a>Delete</a>
+    //         </Space>
+    //     ),
+    // },
+    // ];
+    // const data: Ticket= [
+    //     tickets:{
+    //         stt: 1,
+    //         id: 'ALT10000',
+    //         tensukien: 'A',
+    //         sove: '23186AC',
+    //         ngaysudung: '14/4/2021',
+    //         ngayxuatve: '14/4/2021',
+    //         congcheckin: 'Cổng 1',
+    //     },
+    // ];
+
     return (
         <div className='ticketmanagement-container'>
             <div className="ticketmanagement-list">
@@ -123,7 +214,6 @@ const Ticketmanagement = () => {
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                 />
-
                 <button className="ticketmanagement-csv">Xuất file(.csv)</button>
 
                 <table className="ticketmanagement-body-table">
@@ -136,6 +226,7 @@ const Ticketmanagement = () => {
                         <th>Ngày sử dụng</th>
                         <th>Ngày xuất vé</th>
                         <th>Cổng check-in</th>
+                        <th></th>
                     </tr>
                     {!search &&
                         tickets.map((ticket) =>
@@ -155,6 +246,11 @@ const Ticketmanagement = () => {
                                 <td>{ticket.ngaysudung}</td>
                                 <td>{ticket.ngayxuatve}</td>
                                 <td>{ticket.congcheckin}</td>
+                                <td> <button className="button-more" onClick={Change}><img src={more} alt={more} /></button></td>
+                                <ChangeTicket
+                                    showModal={showModal}
+                                    setShowModal={setShowModal}
+                                />
                             </tr>
                         )}
                     {search &&
@@ -175,9 +271,15 @@ const Ticketmanagement = () => {
                                 <td>{ticket.ngaysudung}</td>
                                 <td>{ticket.ngayxuatve}</td>
                                 <td>{ticket.congcheckin}</td>
+
                             </tr>
                         )
                     }
+                    <Pagination
+                        pageCount={1}
+                        onChange={function ({ selected }: { selected: number; }): void {
+                            throw new Error("Function not implemented.");
+                        }} />
                 </table>
             </div>
         </div>

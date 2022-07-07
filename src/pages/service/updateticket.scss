@@ -106,7 +106,7 @@
   opacity: 0.7;
 }
 .update-applicabledate-input {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -118,14 +118,14 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 32px;
+  left: 25px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .update-applicabledate-time {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -140,8 +140,8 @@
   left: 183px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .update-duedate-label {
   position: absolute;
@@ -164,7 +164,7 @@
   opacity: 0.7;
 }
 .update-duedate-input {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -176,14 +176,14 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 359px;
+  left: 350px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .update-duedate-time {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -195,11 +195,11 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 532px;
+  left: 520px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .update-price-label {
   position: absolute;

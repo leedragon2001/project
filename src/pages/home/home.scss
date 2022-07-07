@@ -16,6 +16,11 @@ $text-color: #1e0d03;
   position: relative;
   left: 30px;
 
+  .home-celendar {
+    position: relative;
+    left: -30px;
+  }
+
   .home-title {
     font-style: normal;
     font-weight: bold;

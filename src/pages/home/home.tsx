@@ -15,7 +15,10 @@ const Home = () => {
             <div className="home-body-content">
                 <div className="home-body-title">
                     <span>Doanh thu</span>
-                    <Celendar />
+                    <div className='home-celendar'>
+                        <Celendar />
+                    </div>
+
                 </div>
 
                 <div className="line-chart">

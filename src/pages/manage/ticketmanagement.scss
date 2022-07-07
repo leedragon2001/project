@@ -140,3 +140,26 @@
   align-self: stretch;
   flex-grow: 0;
 }
+
+.button-more {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 2px;
+
+  width: 100%;
+  height: 22px;
+
+  background: none;
+  border: 0px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  // color: #ff993c;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}

@@ -1,0 +1,183 @@
+.change-container {
+  position: relative;
+  width: 600px;
+  height: 350px;
+  margin: auto;
+  margin-top: 10%;
+  margin-left: -4.4%;
+}
+.change-title {
+  text-align: center;
+  position: relative;
+  margin-top: -70px;
+  margin-left: 250px;
+  width: 1500x;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 30px;
+
+  color: #1e0d03;
+  text-align: center;
+}
+.change-tenve {
+  position: absolute;
+  width: 100px;
+  height: 26px;
+  left: 32px;
+  top: 50px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.change-sove {
+  position: absolute;
+  width: 100px;
+  height: 26px;
+  left: 32px;
+  top: 100px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.change-tensukien {
+  position: absolute;
+  width: 100px;
+  height: 26px;
+  left: 32px;
+  top: 150px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.change-hansudung {
+  position: absolute;
+  width: 150px;
+  height: 26px;
+  left: 32px;
+  top: 200px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+
+  display: flex;
+  align-items: center;
+
+  color: #1e0d03;
+
+  opacity: 0.7;
+}
+.change-date {
+  position: absolute;
+  top: 195px;
+  margin-left: 200px;
+}
+.buttonchange-huy {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  font-weight: 600;
+  color: #ff993c;
+  width: 160px;
+  height: 48px;
+  font-size: 16px;
+  border: 2.5px solid #ff993c;
+  border-radius: 8px;
+  background: #ffffff;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 275px;
+}
+.buttonchange-luu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  border: 0px;
+  width: 160px;
+  height: 48px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  background: #ff993c;
+  border-radius: 8px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  position: absolute;
+  margin-top: 250px;
+  margin-left: 450px;
+}
+.buttonchange-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 344px;
+  height: 48px;
+  left: -10px;
+  bottom: 260px;
+}
+
+.ant-modal-body {
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.5715;
+  word-wrap: break-word;
+  margin-top: 185px;
+  background: #ffffff;
+  border: 0px;
+  border-radius: 16px;
+}

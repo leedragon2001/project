@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { db } from "../../firebase"
 import { collection, getDocs } from "firebase/firestore";
 import './setting.scss'
@@ -8,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import green from '../../assets/green.png'
 import red from '../../assets/red.png'
 import edit from '../../assets/edit.png'
+import { Pagination } from '@mui/material';
 
 
 interface Ticket {
@@ -156,11 +156,6 @@ const Setting = () => {
                             </tr>
                         )
                     }
-
-
-
-
-
                 </table>
             </div>
         </div>

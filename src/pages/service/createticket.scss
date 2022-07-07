@@ -2,7 +2,7 @@
   position: absolute;
   width: 100%;
   height: 30px;
-  left: 30%;
+  left: 40%;
   top: 24px;
 
   font-family: "Montserrat";
@@ -57,7 +57,7 @@
   position: absolute;
   width: 367px;
   height: 40px;
-  left: 32px;
+  left: 30px;
   top: 112px;
 
   border: 1px solid #a5a8b1;
@@ -85,7 +85,7 @@
   opacity: 0.7;
 }
 .create-applicabledate-input {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -97,14 +97,14 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 32px;
+  left: 25px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .create-applicabledate-time {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -119,8 +119,8 @@
   left: 183px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .create-duedate-label {
   position: absolute;
@@ -143,7 +143,7 @@
   opacity: 0.7;
 }
 .create-duedate-input {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -155,14 +155,14 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 359px;
+  left: 350px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .create-duedate-time {
-  box-sizing: border-box;
+  // box-sizing: border-box;
 
   display: flex;
   flex-direction: row;
@@ -174,11 +174,11 @@
   position: absolute;
   width: 142px;
   height: 40px;
-  left: 532px;
+  left: 520px;
   top: 208px;
 
-  border: 1px solid #a5a8b1;
-  border-radius: 8px;
+  // border: 1px solid #a5a8b1;
+  // border-radius: 8px;
 }
 .create-price-label {
   position: absolute;

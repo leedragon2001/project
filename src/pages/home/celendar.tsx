@@ -2,12 +2,14 @@ import { DatePicker, DatePickerProps, Radio, RadioChangeEvent } from 'antd';
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import './celendar.scss'
+import moment from "moment";
 
 type PickerType = "time" | "date" | "week" | "month" | "quarter" | "year" | undefined
 
-const Celendar = ({ format = "MM/YYYY" }) => {
+const Celendar = ({ format = "MM/YYYY", placeholder = "dd/mm/yy", onClick }: any) => {
     const onChange: DatePickerProps["onChange"] = (date, dateString) => {
         console.log(date, dateString);
+        // onClick(date, dateString)
     };
     const [value, setValue] = useState<PickerType>("date");
 
@@ -15,17 +17,22 @@ const Celendar = ({ format = "MM/YYYY" }) => {
         console.log("radio checked", e.target.value);
         setValue(e.target.value);
     };
+    // const [applicableDate, setApplicableDate] = useState<string | undefined>();
+    // const callback = (date: string | undefined) => {
+    //     setApplicableDate(date)
+    // }
     return (
         <div>
-            {/* <DatePicker onChange={onChange} picker="date" /> */}
             <DatePicker
                 showToday={value !== undefined ? false : undefined}
                 picker={value}
-                placeholder="dd/mm/yy"
+                placeholder={placeholder}
                 onChange={onChange}
                 format={format}
+                defaultValue={moment()}
+                // onClick={callback}
                 renderExtraFooter={() => (
-                    <Radio.Group className="flex justify-center my-3" onChange={onChangePickerType} value={value}>
+                    <Radio.Group onChange={onChangePickerType} value={value}>
                         <Radio value="date">Theo ngày</Radio>
                         <Radio value="week">Theo tuần</Radio>
                     </Radio.Group>
