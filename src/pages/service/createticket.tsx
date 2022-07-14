@@ -17,6 +17,7 @@ interface Ticket {
         ngayhethan: string,
         tinhtrang: string,
         giacombo: string
+        sove: number
     }[]
 }
 
@@ -27,15 +28,15 @@ const Createticket = () => {
     const [applicableTime, setApplicableTime] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [dueTime, setDueTime] = useState('');
-    const [singlePrice, setSinglePrice] = useState('');
-    const [comboPrice, setComboPrice] = useState('');
-    const [numberTicket, setNumberTicket] = useState('');
+    const [singlePrice, setSinglePrice] = useState(0);
+    const [comboPrice, setComboPrice] = useState(0);
+    const [numberTicket, setNumberTicket] = useState(0);
     const [status, setStatus] = useState('');
     const usersCollectionRef = collection(db, "servicelist");
     const navigate = useNavigate();
 
     const CreateTicket = async () => {
-        await addDoc(usersCollectionRef, { tengoive: ticketName, giave: singlePrice, giacombo: comboPrice, ngayapdung: applicableDate, ngayhethan: dueDate, tinhtrang: status })
+        await addDoc(usersCollectionRef, { magoi: "ALT20210501", tengoive: ticketName, giave: singlePrice, giacombo: comboPrice, ngayapdung: applicableDate, ngayhethan: dueDate, tinhtrang: status, sove: numberTicket })
     }
 
     return (
@@ -45,20 +46,11 @@ const Createticket = () => {
             <input className="create-ticketname-input" placeholder="Ticket name" onChange={(e: any) => { setTicketName(e.target.value) }} required />
 
             <label className="create-applicabledate-label">Ngày áp dụng</label>
-            <div className="create-applicabledate-input" onChange={(e: any) => { setApplicableDate(e.target.value) }}>
-                <Celendar format="DD/MM/YY" />
-            </div>
-            <div className="create-applicabledate-time" onChange={(e: any) => { setApplicableTime(e.target.value) }}>
-                <Time />
-            </div>
-
+            <input className="create-applicabledate-input" type="date" onChange={(e: any) => { setApplicableDate(e.target.value) }} />
+            <input className="create-applicabledate-time" type="time" onChange={(e: any) => { setApplicableTime(e.target.value) }} />
             <label className="create-duedate-label">Ngày hết hạn</label>
-            <div className="create-duedate-input" onChange={(e: any) => { setDueDate(e.target.value) }}>
-                <Celendar format="DD/MM/YY" />
-            </div>
-            <div className="create-duedate-time" onChange={(e: any) => { setDueTime(e.target.value) }}>
-                <Time />
-            </div>
+            <input className="create-duedate-input" type="date" onChange={(e: any) => { setDueDate(e.target.value) }} />
+            <input className="create-duedate-time" type="time" onChange={(e: any) => { setDueTime(e.target.value) }} />
 
             <label className="create-price-label">Giá vé áp dụng</label>
             <div className="create-singleticket">
@@ -72,22 +64,22 @@ const Createticket = () => {
                 <label className="create-comboticket-label">Combo vé với giá</label>
                 <input className="create-comboticket-input-giave" placeholder="Giá vé" onChange={(e: any) => { setComboPrice(e.target.value) }} />
                 <label>/</label>
-                <input className="create-comboticket-input-sove" placeholder="Số vé" />
+                <input className="create-comboticket-input-sove" placeholder="Số vé" onChange={(e: any) => { setNumberTicket(e.target.value) }} />
                 <label>vé</label>
             </div>
 
             <div>
                 <label className="create-label-status">Tình trạng</label>
-                <select className="create-status">
-                    <option value={0} onChange={(e: any) => { setStatus(e.target.value) }}>Đang áp dụng</option>
-                    <option value={1} onChange={(e: any) => { setStatus(e.target.value) }}>Chưa áp dụng</option>
+                <select className="create-status" defaultValue="Chưa áp dụng" onChange={(e: any) => { setStatus(e.target.value) }}>
+                    <option value="Đang áp dụng" >Đang áp dụng</option>
+                    <option value="Chưa áp dụng">Chưa áp dụng</option>
                 </select>
             </div>
 
 
             <div className="create-button-holder">
                 <button className="create-huy" onClick={() => navigate(-1)}>Hủy</button>
-                <button className="create-luu" onClick={CreateTicket}>Lưu</button>
+                <button className="create-luu" type="submit" onClick={CreateTicket} >Lưu</button>
             </div>
 
         </div>

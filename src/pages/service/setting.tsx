@@ -8,7 +8,8 @@ import green from '../../assets/green.png'
 import red from '../../assets/red.png'
 import edit from '../../assets/edit.png'
 import { Pagination } from '@mui/material';
-
+import { CSVLink } from 'react-csv'
+import Paginate from '../pagination';
 
 interface Ticket {
     ticket: {
@@ -19,14 +20,15 @@ interface Ticket {
         ngayapdung: string,
         ngayhethan: string,
         tinhtrang: string,
-        giacombo: string
+        giacombo: string,
+        sove: number
     }[]
 }
 
 const Setting = () => {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
-    const [result, setResult] = useState<Ticket["ticket"]>([]);
+    const [filterResult, setFilterResult] = useState<Ticket["ticket"]>([]);
     const [tickets, setTickets] = useState<Ticket["ticket"]>([]);
     const usersCollectionRef = collection(db, "servicelist");
     useEffect(() => {
@@ -79,23 +81,33 @@ const Setting = () => {
     }
 
     useEffect(() => {
-        setResult([]);
-        tickets.filter(value => {
-            if (value.magoi.toString().includes(search)) {
-                setResult(result => [...result, value])
-            }
-            else if (value.tengoive.toLowerCase().includes(search)) {
-                setResult(result => [...result, value])
-            }
-            else if (value.giacombo.toString().includes(search)) {
-                setResult(result => [...result, value])
-            }
-            else if (value.giave.toString().includes(search)) {
-                setResult(result => [...result, value])
-            }
-        })
+        setFilterResult(tickets);
+    }, [tickets]);
 
-    }, [search])
+    useEffect(() => {
+        if (search === "") setFilterResult(tickets);
+        setFilterResult((prev) =>
+            prev.filter((e) => e.magoi.toLowerCase().includes(search.toLowerCase()))
+        );
+    }, [search]);
+
+    const header = [
+        { label: 'STT', key: 'stt' },
+        { label: ' Mã gói', key: 'magoi' },
+        { label: ' Tên gói vé', key: 'tengoive' },
+        { label: 'Ngày áp dụng', key: 'ngayapdung' },
+        { label: 'Ngày hết hạn', key: 'ngayhethan' },
+        { label: 'Giá vé (VNĐ/vé)', key: 'giave' },
+        { label: 'Giá Combo (VNĐ/Combo)', key: 'giacombo' },
+        { label: 'Tình trạng', key: 'tinhtrang' }
+
+    ]
+
+    const csvReport = {
+        filename: "Files.csv",
+        headers: header,
+        data: tickets
+    }
 
     return (
         <div className="setting-container">
@@ -103,7 +115,10 @@ const Setting = () => {
                 <h1 className="setting-title">Ticket List</h1>
                 <input className="setting-search" type="text" placeholder="Tìm bằng số vé" onChange={(e) => setSearch(e.target.value)} />
                 <button className="setting-add-ticket" onClick={() => handleCreate()}>Thêm gói vé</button>
-                <button className="setting-csv">Xuất file(.csv)</button>
+                {/* <button className="setting-csv">Xuất file(.csv)</button> */}
+                <CSVLink className="setting-csv" type="button" {...csvReport}>
+                    Xuất file(.csv)
+                </CSVLink>
                 <table className="setting-body-table">
                     <tr className="setting-table-heading">
                         <th>STT</th>
@@ -116,46 +131,26 @@ const Setting = () => {
                         <th>Tình trạng</th>
                         <th></th>
                     </tr>
-                    { }
-                    {!search &&
-                        tickets.map((ticket) =>
-                            <tr className="setting-table-content">
-                                <td>{ticket.stt}</td>
-                                <td>{ticket.magoi}</td>
-                                <td>{ticket.tengoive}</td>
-                                <td>{ticket.ngayapdung}</td>
-                                <td>{ticket.ngayhethan}</td>
-                                <td>{ticket.giave}</td>
-                                <td>{ticket.giacombo}</td>
-                                <td className='setting-tinhtrang'>
-                                    {ticket.tinhtrang === "Đang áp dụng" &&
-                                        <Typography style={applying}><img src={green} alt={green} /> {ticket.tinhtrang}</Typography>}
-                                    {ticket.tinhtrang === "Tắt" &&
-                                        <Typography style={off}><img src={red} alt={red} /> {ticket.tinhtrang}</Typography>}
-                                </td>
-                                <td><button className='setting-button-update' onClick={() => handleUpdate()}><img src={edit} alt={edit} />Cập nhật</button></td>
-                            </tr>
-                        )}
-                    {search &&
-                        result.map((ticket) =>
-                            <tr className="setting-table-content">
-                                <td>{ticket.stt}</td>
-                                <td>{ticket.magoi}</td>
-                                <td>{ticket.tengoive}</td>
-                                <td>{ticket.ngayapdung}</td>
-                                <td>{ticket.ngayhethan}</td>
-                                <td>{ticket.giave}</td>
-                                <td>{ticket.giacombo}</td>
-                                <td className='setting-tinhtrang'>
-                                    {ticket.tinhtrang === "Đang áp dụng" &&
-                                        <Typography style={applying}><img src={green} alt={green} /> {ticket.tinhtrang}</Typography>}
-                                    {ticket.tinhtrang === "Tắt" &&
-                                        <Typography style={off}><img src={red} alt={red} /> {ticket.tinhtrang}</Typography>}
-                                </td>
-                                <td><button className='setting-button-update' onClick={() => handleUpdate()}><img src={edit} alt={edit} />Cập nhật</button></td>
-                            </tr>
-                        )
-                    }
+
+                    {filterResult.map((ticket) =>
+                        <tr className="setting-table-content">
+                            <td>{ticket.stt}</td>
+                            <td>{ticket.magoi}</td>
+                            <td>{ticket.tengoive}</td>
+                            <td>{ticket.ngayapdung}</td>
+                            <td>{ticket.ngayhethan}</td>
+                            <td>{ticket.giave}</td>
+                            <td>{ticket.giacombo}/{ticket.sove}vé</td>
+                            <td className='setting-tinhtrang'>
+                                {ticket.tinhtrang === "Đang áp dụng" &&
+                                    <Typography style={applying}><img src={green} alt={green} /> {ticket.tinhtrang}</Typography>}
+                                {ticket.tinhtrang === "Tắt" &&
+                                    <Typography style={off}><img src={red} alt={red} /> {ticket.tinhtrang}</Typography>}
+                            </td>
+                            <td><button className='setting-button-update' onClick={() => handleUpdate()}><img src={edit} alt={edit} />Cập nhật</button></td>
+                        </tr>
+                    )}
+                    <Paginate />
                 </table>
             </div>
         </div>

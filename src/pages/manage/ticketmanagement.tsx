@@ -12,24 +12,20 @@ import { Typography } from '@material-ui/core';
 import FilterTicket from "./filterticket";
 import more from '../../assets/more.png';
 import ChangeTicket from './changeticket';
-// import BootstrapTable from 'react-bootstrap-table-next';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import { Space, Table, Tag } from 'antd';
-import type { ColumnsType } from 'antd/lib/table';
-import { Pagination } from "../pagination";
+import Paginate from "../pagination";
+import { CSVLink } from 'react-csv'
 
 interface Ticket {
-    ticket: {
-        stt: number,
-        id: string,
-        tensukien: string,
-        sove: number,
-        ngaysudung: string,
-        ngayxuatve: string,
-        tinhtrangsudung: string,
-        congcheckin: string
-    }[]
+
+    stt: number,
+    id: string,
+    tensukien: string,
+    sove: number,
+    ngaysudung: string,
+    ngayxuatve: string,
+    tinhtrangsudung: string,
+    congcheckin: string
+
 }
 
 const Ticketmanagement = () => {
@@ -37,8 +33,8 @@ const Ticketmanagement = () => {
     const [openModal, setOpenModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState("");
-    const [result, setResult] = useState<Ticket["ticket"]>([]);
-    const [tickets, setTickets] = useState<Ticket["ticket"]>([]);
+    const [filterResult, setFilterResult] = useState<Ticket[]>([]);
+    const [tickets, setTickets] = useState<Ticket[]>([]);
     const usersCollectionRef = collection(db, "ticketlist");
     useEffect(() => {
         const getTickets = async () => {
@@ -49,21 +45,17 @@ const Ticketmanagement = () => {
         getTickets();
     }, []);
 
-    useEffect(() => {
-        setResult([]);
-        tickets.filter(value => {
-            if (value.sove.toString().includes(search)) {
-                setResult(result => [...result, value])
-            }
-            else if (value.tensukien.toLowerCase().includes(search)) {
-                setResult(result => [...result, value])
-            }
-            else if (value.id.toLowerCase().includes(search)) {
-                setResult(result => [...result, value])
-            }
-        })
 
-    }, [search])
+    useEffect(() => {
+        setFilterResult(tickets);
+    }, [tickets]);
+
+    useEffect(() => {
+        if (search === "") setFilterResult(tickets);
+        setFilterResult((prev) =>
+            prev.filter((e) => e.id.toLowerCase().includes(search.toLowerCase()))
+        );
+    }, [search]);
 
     const Applied = {
         border: "0.5px solid #03AC00",
@@ -121,84 +113,24 @@ const Ticketmanagement = () => {
         setShowModal(true);
     }
 
-    // const columns: ColumnsType<Ticket> = [
-    //     {
-    //         title: 'STT',
-    //         dataIndex: 'stt',
-    //         key: 'stt',
-    //     },
-    //     {
-    //         title: 'id',
-    //         dataIndex: 'id',
-    //         key: 'id',
-    //     },
-    //     {
-    //         title: 'Số vé',
-    //         dataIndex: 'sove',
-    //         key: 'sove',
-    //     },
-    //     {
-    //         title: 'Tên sự kiện',
-    //         dataIndex: 'tensukien',
-    //         key: 'tensukien',
-    //     },
-    //     {
-    //         title: 'Tình trạng sử dụng',
-    //         key: 'tinhtrangsudung',
-    //         dataIndex: 'tinhtrangsudung',
-    //         render: (_, { tinhtrangsudung }) => (
-    //             <>
-    //                 {tinhtrangsudung.map((ticket: any) => {
-    //                     let color = ticket.length > 5 ? 'geekblue' : 'green';
-    //                     if (ticket === 'loser') {
-    //                         color = 'volcano';
-    //                     }
-    //                     return (
-    //                         <Tag color={color} key={ticket}>
-    //                             {ticket.toUpperCase()}
-    //                         </Tag>
-    //                     );
-    //                 })}
-    //             </>
-    //         ),
-    //     },
-    //     {
-    //         title: 'Ngày sử dụng',
-    //         dataIndex: 'ngaysudung',
-    //         key: 'ngaysudung',
-    //     },
-    //     {
-    //         title: 'Ngày xuất vé',
-    //         dataIndex: 'ngayxuatve',
-    //         key: 'ngayxuatve',
-    //     },
-    //     {
-    //         title: 'Cổng check-in',
-    //         dataIndex: 'congcheckin',
-    //         key: 'congcheckin',
-    //     },
-    // {
-    //     title: 'Action',
-    //     key: 'action',
-    //     render: (_, record) => (
-    //         <Space size="middle">
-    //             <a>Invite {record.name}</a>
-    //             <a>Delete</a>
-    //         </Space>
-    //     ),
-    // },
-    // ];
-    // const data: Ticket= [
-    //     tickets:{
-    //         stt: 1,
-    //         id: 'ALT10000',
-    //         tensukien: 'A',
-    //         sove: '23186AC',
-    //         ngaysudung: '14/4/2021',
-    //         ngayxuatve: '14/4/2021',
-    //         congcheckin: 'Cổng 1',
-    //     },
-    // ];
+    const header = [
+        { label: 'STT', key: 'stt' },
+        { label: 'Booking code', key: 'id' },
+        { label: 'Số vé', key: 'sove' },
+        { label: 'Tên sự kiện', key: 'tensukien' },
+        { label: 'Tình trạng sử dụng', key: 'tinhtrangsudung' },
+        { label: 'Ngày sử dụng', key: 'ngaysudung' },
+        { label: 'Ngày xuất vé', key: 'ngayxuatve' },
+        { label: 'Cổng check-in', key: 'congcheckin' }
+    ]
+
+    const csvReport = {
+        filename: "File.csv",
+        headers: header,
+        data: tickets
+    }
+
+
 
     return (
         <div className='ticketmanagement-container'>
@@ -214,7 +146,10 @@ const Ticketmanagement = () => {
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                 />
-                <button className="ticketmanagement-csv">Xuất file(.csv)</button>
+                {/* <button className="ticketmanagement-csv">Xuất file(.csv)</button> */}
+                <CSVLink className="ticketmanagement-csv" type="button" {...csvReport}>
+                    Xuất file(.csv)
+                </CSVLink>
 
                 <table className="ticketmanagement-body-table">
                     <tr className="ticketmanagement-table-heading">
@@ -228,58 +163,33 @@ const Ticketmanagement = () => {
                         <th>Cổng check-in</th>
                         <th></th>
                     </tr>
-                    {!search &&
-                        tickets.map((ticket) =>
-                            <tr className="ticketmanagement-table-content">
-                                <td>{ticket.stt}</td>
-                                <td>{ticket.id}</td>
-                                <td>{ticket.sove}</td>
-                                <td>{ticket.tensukien}</td>
-                                <td className='setting-tinhtrang'>
-                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
-                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
-                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
-                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
-                                    {ticket.tinhtrangsudung === "Hết hạn" &&
-                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
-                                </td>
-                                <td>{ticket.ngaysudung}</td>
-                                <td>{ticket.ngayxuatve}</td>
-                                <td>{ticket.congcheckin}</td>
-                                <td> <button className="button-more" onClick={Change}><img src={more} alt={more} /></button></td>
-                                <ChangeTicket
-                                    showModal={showModal}
-                                    setShowModal={setShowModal}
-                                />
-                            </tr>
-                        )}
-                    {search &&
-                        result.map((ticket) =>
-                            <tr className="ticketmanagement-table-content">
-                                <td>{ticket.stt}</td>
-                                <td>{ticket.id}</td>
-                                <td>{ticket.sove}</td>
-                                <td>{ticket.tensukien}</td>
-                                <td className='setting-tinhtrang'>
-                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
-                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
-                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
-                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
-                                    {ticket.tinhtrangsudung === "Hết hạn" &&
-                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
-                                </td>
-                                <td>{ticket.ngaysudung}</td>
-                                <td>{ticket.ngayxuatve}</td>
-                                <td>{ticket.congcheckin}</td>
+                    {filterResult.map((ticket) =>
+                        <tr className="ticketmanagement-table-content">
+                            <td>{ticket.stt}</td>
+                            <td>{ticket.id}</td>
+                            <td>{ticket.sove}</td>
+                            <td>{ticket.tensukien}</td>
+                            <td className='setting-tinhtrang'>
+                                {ticket.tinhtrangsudung === "Chưa sử dụng" &&
+                                    <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
+                                {ticket.tinhtrangsudung === "Đã sử dụng" &&
+                                    <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
+                                {ticket.tinhtrangsudung === "Hết hạn" &&
+                                    <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
+                            </td>
+                            <td>{ticket.ngaysudung}</td>
+                            <td>{ticket.ngayxuatve}</td>
+                            <td>{ticket.congcheckin}</td>
+                            <td> <button className="button-more" onClick={Change}><img src={more} alt={more} /></button></td>
+                            <ChangeTicket
+                                showModal={showModal}
+                                setShowModal={setShowModal}
+                            />
+                        </tr>
+                    )}
+                    <Paginate />
 
-                            </tr>
-                        )
-                    }
-                    <Pagination
-                        pageCount={1}
-                        onChange={function ({ selected }: { selected: number; }): void {
-                            throw new Error("Function not implemented.");
-                        }} />
+
                 </table>
             </div>
         </div>

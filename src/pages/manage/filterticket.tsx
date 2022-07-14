@@ -4,6 +4,8 @@ import './filterticket.scss'
 import { Button, Modal } from "antd";
 import Celendar from '../home/celendar'
 import 'antd/dist/antd.css';
+import { db } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 
 
@@ -12,7 +14,7 @@ const FilterTicket = ({ openModal, setOpenModal }: any) => {
     const [applicableDate, setApplicableDate] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [checkAll, setCheckAll] = useState(false);
-    const [check, setCheck] = useState(["casd", "ASdf"]);
+    const [check, setCheck] = useState(["", ""]);
     const [list, setList] = useState([""]);
     const [selectedOption, setSelectedOption] = useState();
 
@@ -52,7 +54,6 @@ const FilterTicket = ({ openModal, setOpenModal }: any) => {
             centered
             closable={false}
             footer={null}
-            // title="Lọc vé"
             visible={openModal}
             onCancel={handleCancel}
             width={600}

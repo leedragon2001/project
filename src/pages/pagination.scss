@@ -1,54 +1,51 @@
-.Pagination {
-  this: &;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ant-pagination {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
   list-style: none;
-  outline: transparent;
+  font-feature-settings: "tnum", "tnum";
   position: absolute;
-  left: 650px;
+  margin-left: 650px;
+}
 
-  & > li {
-    margin: 2px;
-    height: 30px;
-    width: 30px;
-  }
+.ant-pagination-item-active a {
+  color: #ff993c;
+}
 
-  & > li > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 30px;
-    color: #0158;
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    outline: transparent;
-    cursor: pointer;
+.ant-pagination-item-active {
+  font-weight: 500;
+  background: #fff;
+  border-color: #ff993c;
+}
 
-    &:hover {
-      background-color: #00ffff;
-    }
-  }
-  & > #{this}__active > a {
-    background-color: #545231;
-    border-color: #545231;
-    color: white;
-  }
-  & > #{this}__active > a,
-  & > #{this}__active > a:hover,
-  & > #{this}__active > a:focus {
-    background-color: #545231;
-    border-color: #545231;
-    outline: transparent;
-    cursor: default;
-  }
+.anticon svg {
+  display: inline-block;
+  color: #ff993c;
+}
 
-  & > .disabled > a {
-    cursor: default;
-  }
-  &:hover {
-    background-color: transparent;
-  }
+.ant-pagination-item {
+  display: inline-block;
+  min-width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  list-style: none;
+  background-color: #fff;
+  // border: 1px solid #ff993c;
+  // border-radius: 2px;
+  outline: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
