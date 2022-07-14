@@ -43,6 +43,26 @@
   background: #ff993c;
   border-radius: 8px;
 }
+.checkticket-csv {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 24px;
+  gap: 10px;
+  border: 1px solid #ff993c;
+  position: absolute;
+  width: 174px;
+  height: 48px;
+  right: 24px;
+  top: 110px;
+  color: #ff993c;
+  font-weight: 600;
+
+  background: #ffff;
+  border-radius: 8px;
+}
 .checkticket-title {
   position: absolute;
   width: 276px;

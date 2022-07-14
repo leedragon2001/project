@@ -6,20 +6,20 @@ import './changeticket.scss'
 // import { collection, getDocs, addDoc } from "firebase/firestore";
 
 interface Ticket {
-    ticket: {
-        stt: number,
-        id: string,
-        tensukien: string,
-        sove: number,
-        ngaysudung: string,
-        ngayxuatve: string,
-        tinhtrangsudung: string,
-        congcheckin: string
-    }[]
+
+    stt: number,
+    id: string,
+    tensukien: string,
+    sove: number,
+    ngaysudung: string,
+    ngayxuatve: string,
+    tinhtrangsudung: string,
+    congcheckin: string
+
 }
 
 const ChangeTicket = ({ showModal, setShowModal }: any) => {
-    const [tickets, setTickets] = useState<Ticket["ticket"]>([]);
+    const [tickets, setTickets] = useState<Ticket[]>([]);
     // const usersCollectionRef = collection(db, "ticketlist");
     // const getTickets = async () => {
     //     const res = await getDocs(usersCollectionRef).then((res) => {

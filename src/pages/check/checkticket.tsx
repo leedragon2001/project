@@ -6,6 +6,7 @@ import { db } from "../../firebase";
 import Celendar from "../home/celendar";
 import moment from "moment";
 import Paginate from "../pagination";
+import { CSVLink } from 'react-csv'
 interface Ticket {
     stt: number;
     sove: string;
@@ -67,6 +68,23 @@ const Checkticket = () => {
         color: "#FD5959",
     };
 
+    const header = [
+        { label: 'STT', key: 'stt' },
+
+        { label: 'Số vé', key: 'sove' },
+        { label: 'Tên sự kiện', key: 'tensukien' },
+        { label: 'Ngày sử dụng', key: 'ngaysudung' },
+        { label: 'Tên loại vé', key: 'tenloaive' },
+        { label: 'Cổng check-in', key: 'congcheckin' },
+        { label: 'Trạng Thái', key: 'tinhtrangve' }
+    ]
+
+    const csvReport = {
+        filename: "File.csv",
+        headers: header,
+        data: tickets
+    }
+
     return (
         <div className="checkticket-container">
             <div className="checkticket-list">
@@ -77,7 +95,27 @@ const Checkticket = () => {
                     placeholder="Tìm bằng số vé"
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="checkticket-doisoat">Chốt đối soát</button>
+
+
+                {!status &&
+                    <button className="checkticket-doisoat">Chốt đối soát</button>
+                }
+
+                {status.includes("Chưa đối soát") &&
+                    <button className="checkticket-doisoat">Chốt đối soát</button>
+                }
+
+                {status.includes("Tất cả") &&
+                    <button className="checkticket-doisoat">Chốt đối soát</button>
+                }
+
+                {status === "Đã đối soát" &&
+
+                    <CSVLink className="checkticket-csv" type="button" {...csvReport}>
+                        Xuất file(.csv)
+                    </CSVLink>
+
+                }
 
                 <table className="checkticket-body-table">
                     <tr className="checkticket-table-heading">
