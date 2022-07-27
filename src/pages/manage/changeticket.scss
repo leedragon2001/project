@@ -171,28 +171,44 @@
   bottom: 260px;
 }
 
+.change-tenve-label {
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 2px;
+  width: 50%;
+  border: 0;
+  background-color: #ffffff;
+}
+.change-sove-label {
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 52px;
+  width: 50%;
+  border: 0;
+  background-color: #ffffff;
+}
+.change-tensukien-label {
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 105px;
+  width: 50%;
+  border: 0;
+  background-color: #ffffff;
+}
+
 .ant-modal-body {
   padding: 24px;
   font-size: 14px;
   line-height: 1.5715;
   word-wrap: break-word;
   margin-top: 185px;
-  background: #ffffff;
-  border: 0px;
-  border-radius: 16px;
 }
-.change-tenve-label {
-  position: absolute;
-  margin-left: 200px;
-  margin-top: 2px;
-}
-.change-sove-label {
-  position: absolute;
-  margin-left: 200px;
-  margin-top: 52px;
-}
-.change-tensukien-label {
-  position: absolute;
-  margin-left: 200px;
-  margin-top: 105px;
+.ant-modal-content {
+  position: relative;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 30px;
+  pointer-events: auto;
+  left: 90px;
 }

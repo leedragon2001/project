@@ -14,9 +14,11 @@ import more from '../../assets/more.png';
 import ChangeTicket from './changeticket';
 import Paginate from "../pagination";
 import { CSVLink } from 'react-csv'
+import next from '../../assets/next.png'
+import back from '../../assets/back.png'
 
 interface Ticket {
-
+    key: string,
     stt: number,
     id: string,
     tensukien: string,
@@ -35,6 +37,28 @@ const Ticketmanagement = () => {
     const [search, setSearch] = useState("");
     const [filterResult, setFilterResult] = useState<Ticket[]>([]);
     const [tickets, setTickets] = useState<Ticket[]>([]);
+    const [filterState, setFilterState] = useState<Ticket[]>([])
+    const [propTicketCode, setPropTicketCode] = useState()
+    const [propTicketNumber, setPropTicketNumber] = useState()
+    const [propTicketName, setPropTicketName] = useState()
+    const [propsTicketDueDate, setPropTicketDueDate] = useState()
+    const [keyID, setKeyID] = useState<number>(0)
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const Pagination = ((pageNumber: any) => setCurrentPage(pageNumber));
+    const btnBack = ((pageNumber: any) => { if (currentPage > 1) { setCurrentPage(currentPage - 1) } });
+    const btnNext = ((pageNumber: any) => { if (currentPage < pageNumbers.length) { setCurrentPage(currentPage + 1) } });
+    const [PerPage] = useState(10);
+    const pageNumbers = [];
+
+    const indexOfLastPost = currentPage * PerPage;
+    const indexOfFirstPost = indexOfLastPost - PerPage;
+    const currentTickets = tickets.slice(indexOfFirstPost, indexOfLastPost);
+    for (let i = 1; i <= Math.ceil(tickets.length / PerPage); i++) {
+        pageNumbers.push(i);
+    }
+
+
     const usersCollectionRef = collection(db, "ticketlist");
     useEffect(() => {
         const getTickets = async () => {
@@ -109,8 +133,13 @@ const Ticketmanagement = () => {
         setOpenModal(true);
     }
 
-    const Change = () => {
+    const Change = (key: any, id: any, num1: any, name1: any, duetime: any) => {
         setShowModal(true);
+        setKeyID(key)
+        setPropTicketName(name1)
+        setPropTicketCode(id)
+        setPropTicketNumber(num1)
+        setPropTicketDueDate(duetime)
     }
 
     const header = [
@@ -130,7 +159,11 @@ const Ticketmanagement = () => {
         data: tickets
     }
 
-
+    useEffect(() => {
+        setFilterResult(filterState);
+        setTickets([])
+        console.log(filterState)
+    }, [filterState])
 
     return (
         <div className='ticketmanagement-container'>
@@ -145,6 +178,7 @@ const Ticketmanagement = () => {
                 <FilterTicket
                     openModal={openModal}
                     setOpenModal={setOpenModal}
+                    setParent={setFilterState}
                 />
                 {/* <button className="ticketmanagement-csv">Xuất file(.csv)</button> */}
                 <CSVLink className="ticketmanagement-csv" type="button" {...csvReport}>
@@ -163,34 +197,149 @@ const Ticketmanagement = () => {
                         <th>Cổng check-in</th>
                         <th></th>
                     </tr>
-                    {filterResult.map((ticket) =>
-                        <tr className="ticketmanagement-table-content">
-                            <td>{ticket.stt}</td>
-                            <td>{ticket.id}</td>
-                            <td>{ticket.sove}</td>
-                            <td>{ticket.tensukien}</td>
-                            <td className='setting-tinhtrang'>
-                                {ticket.tinhtrangsudung === "Chưa sử dụng" &&
-                                    <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
-                                {ticket.tinhtrangsudung === "Đã sử dụng" &&
-                                    <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
-                                {ticket.tinhtrangsudung === "Hết hạn" &&
-                                    <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
-                            </td>
-                            <td>{ticket.ngaysudung}</td>
-                            <td>{ticket.ngayxuatve}</td>
-                            <td>{ticket.congcheckin}</td>
-                            <td> <button className="button-more" onClick={Change}><img src={more} alt={more} /></button></td>
-                            <ChangeTicket
-                                showModal={showModal}
-                                setShowModal={setShowModal}
-                            />
-                        </tr>
-                    )}
-                    <Paginate />
-
+                    {!filterState && search &&
+                        filterResult.map((ticket) =>
+                            <tr className="ticketmanagement-table-content">
+                                <td>{ticket.stt}</td>
+                                <td>{ticket.id}</td>
+                                <td>{ticket.sove}</td>
+                                <td>{ticket.tensukien}</td>
+                                <td className='setting-tinhtrang'>
+                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
+                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
+                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Hết hạn" &&
+                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
+                                </td>
+                                <td>{ticket.ngaysudung}</td>
+                                <td>{ticket.ngayxuatve}</td>
+                                <td>{ticket.congcheckin}</td>
+                                <td> <button className="button-more" onClick={() => { Change(ticket.key, ticket.id, ticket.sove, ticket.tensukien, ticket.ngayxuatve) }}><img src={more} alt={more} /></button></td>
+                                <ChangeTicket
+                                    showModal={showModal}
+                                    setShowModal={setShowModal}
+                                    ticketID={keyID}
+                                    id={propTicketCode}
+                                    sove={propTicketNumber}
+                                    tensukien={propTicketName}
+                                    ngayhethan={propsTicketDueDate}
+                                />
+                            </tr>
+                        )}
+                    {filterState && !search &&
+                        filterState.map((ticket) =>
+                            <tr className="ticketmanagement-table-content">
+                                <td>{ticket.stt}</td>
+                                <td>{ticket.id}</td>
+                                <td>{ticket.sove}</td>
+                                <td>{ticket.tensukien}</td>
+                                <td className='setting-tinhtrang'>
+                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
+                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
+                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Hết hạn" &&
+                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
+                                </td>
+                                <td>{ticket.ngaysudung}</td>
+                                <td>{ticket.ngayxuatve}</td>
+                                <td>{ticket.congcheckin}</td>
+                                <td> <button className="button-more" onClick={() => { Change(ticket.key, ticket.id, ticket.sove, ticket.tensukien, ticket.ngayxuatve) }}><img src={more} alt={more} /></button></td>
+                                <ChangeTicket
+                                    showModal={showModal}
+                                    setShowModal={setShowModal}
+                                    ticketID={keyID}
+                                    id={propTicketCode}
+                                    sove={propTicketNumber}
+                                    tensukien={propTicketName}
+                                    ngayhethan={propsTicketDueDate}
+                                />
+                            </tr>
+                        )}
+                    {!search &&
+                        tickets.map((ticket) =>
+                            <tr className="ticketmanagement-table-content">
+                                <td>{ticket.stt}</td>
+                                <td>{ticket.id}</td>
+                                <td>{ticket.sove}</td>
+                                <td>{ticket.tensukien}</td>
+                                <td className='setting-tinhtrang'>
+                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
+                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
+                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Hết hạn" &&
+                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
+                                </td>
+                                <td>{ticket.ngaysudung}</td>
+                                <td>{ticket.ngayxuatve}</td>
+                                <td>{ticket.congcheckin}</td>
+                                <td> <button className="button-more" onClick={() => { Change(ticket.key, ticket.id, ticket.sove, ticket.tensukien, ticket.ngayxuatve) }}><img src={more} alt={more} /></button></td>
+                                <ChangeTicket
+                                    showModal={showModal}
+                                    setShowModal={setShowModal}
+                                    ticketID={keyID}
+                                    id={propTicketCode}
+                                    sove={propTicketNumber}
+                                    tensukien={propTicketName}
+                                    ngayhethan={propsTicketDueDate}
+                                />
+                            </tr>
+                        )}
+                    {!filterState &&
+                        tickets.map((ticket) =>
+                            <tr className="ticketmanagement-table-content">
+                                <td>{ticket.stt}</td>
+                                <td>{ticket.id}</td>
+                                <td>{ticket.sove}</td>
+                                <td>{ticket.tensukien}</td>
+                                <td className='setting-tinhtrang'>
+                                    {ticket.tinhtrangsudung === "Chưa sử dụng" &&
+                                        <Typography style={Applied}><img src={green} alt={green} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Đã sử dụng" &&
+                                        <Typography style={NotApply}><img src={blue} alt={blue} /> {ticket.tinhtrangsudung}</Typography>}
+                                    {ticket.tinhtrangsudung === "Hết hạn" &&
+                                        <Typography style={Over}><img src={red} alt={red} /> {ticket.tinhtrangsudung}</Typography>}
+                                </td>
+                                <td>{ticket.ngaysudung}</td>
+                                <td>{ticket.ngayxuatve}</td>
+                                <td>{ticket.congcheckin}</td>
+                                <td> <button className="button-more" onClick={() => { Change(ticket.key, ticket.id, ticket.sove, ticket.tensukien, ticket.ngayxuatve) }}><img src={more} alt={more} /></button></td>
+                                <ChangeTicket
+                                    showModal={showModal}
+                                    setShowModal={setShowModal}
+                                    ticketID={keyID}
+                                    id={propTicketCode}
+                                    sove={propTicketNumber}
+                                    tensukien={propTicketName}
+                                    ngayhethan={propsTicketDueDate}
+                                />
+                            </tr>
+                        )}
 
                 </table>
+                <div className='pagination'>
+
+                    {pageNumbers.map(number => (
+                        <div>
+                            <button className="back-management" onClick={() => btnBack(number)}>
+                                <img src={back} alt="back" />
+                            </button>
+
+                            <div key={number} className='items-page-management' onClick={() => Pagination(number)} >
+                                <a className='links-page-management'>
+                                    {number}
+                                </a>
+                            </div>
+
+                            <button className="next-management" onClick={() => btnNext(number)}>
+                                <img src={next} alt="next" />
+                            </button>
+                        </div>
+                    ))}
+
+                </div>
             </div>
         </div>
     );

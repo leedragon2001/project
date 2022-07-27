@@ -1,17 +1,24 @@
-import type { PaginationProps } from 'antd';
-import { Pagination } from 'antd';
-import { useState } from 'react';
-import './pagination.scss'
+import React from "react";
+import "./pagination.scss"
 
-const Paginate = () => {
-    const [current, setCurrent] = useState(1);
+const Paginate = (PerPage: any, Total: any, Pagination: any) => {
+    const pageNumbers = [];
 
-    const onChange: PaginationProps['onChange'] = page => {
-        setCurrent(page);
+    for (let i = 1; i <= Math.ceil(Total / PerPage); i++) {
+        pageNumbers.push(i);
+    }
 
-    };
-
-    return <Pagination current={current} onChange={onChange} total={10} />;
+    return (
+        <div className='paginate'>
+            {pageNumbers.map(number => (
+                <span key={number} className='items-page'>
+                    <a onClick={() => Pagination(number)} href='!#' className='links-page'>
+                        {number}
+                    </a>
+                </span>
+            ))}
+        </div>
+    );
 };
 
 export default Paginate;

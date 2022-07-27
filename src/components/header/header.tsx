@@ -22,11 +22,8 @@ const Header = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ticket-manage" element={<Ticketmanagement />} />
-          {/* <Route path="/ticket-manage/filterticket" element={<FilterTicket />} /> */}
           <Route path="/check-tickets" element={<Checkticket />} />
           <Route path="/setting" element={<Setting />} />
-          <Route path="/setting/createticket" element={<Createticket />} />
-          <Route path="/setting/updateticket" element={<Updateticket />} />
         </Routes>
       </div>
     </div>

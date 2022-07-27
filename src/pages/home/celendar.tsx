@@ -6,10 +6,13 @@ import moment from "moment";
 
 type PickerType = "time" | "date" | "week" | "month" | "quarter" | "year" | undefined
 
-const Celendar = ({ format = "MM/YYYY", placeholder = "dd/mm/yy", onClick }: any) => {
+const Celendar = ({ format = "MM/YYYY", placeholder = "dd/mm/yy", startday, endday }: any) => {
     const onChange: DatePickerProps["onChange"] = (date, dateString) => {
         console.log(date, dateString);
-        // onClick(date, dateString)
+        if (date) {
+            if (startday) { startday(dateString) }
+            if (endday) { endday(dateString) }
+        }
     };
     const [value, setValue] = useState<PickerType>("date");
 
@@ -17,10 +20,7 @@ const Celendar = ({ format = "MM/YYYY", placeholder = "dd/mm/yy", onClick }: any
         console.log("radio checked", e.target.value);
         setValue(e.target.value);
     };
-    // const [applicableDate, setApplicableDate] = useState<string | undefined>();
-    // const callback = (date: string | undefined) => {
-    //     setApplicableDate(date)
-    // }
+
     return (
         <div>
             <DatePicker
@@ -30,7 +30,6 @@ const Celendar = ({ format = "MM/YYYY", placeholder = "dd/mm/yy", onClick }: any
                 onChange={onChange}
                 format={format}
                 defaultValue={moment()}
-                // onClick={callback}
                 renderExtraFooter={() => (
                     <Radio.Group onChange={onChangePickerType} value={value}>
                         <Radio value="date">Theo ngày</Radio>

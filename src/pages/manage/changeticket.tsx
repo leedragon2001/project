@@ -2,64 +2,48 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Celendar from '../home/celendar';
 import './changeticket.scss'
-// import { db } from "../../firebase";
-// import { collection, getDocs, addDoc } from "firebase/firestore";
-
-interface Ticket {
-
-    stt: number,
-    id: string,
-    tensukien: string,
-    sove: number,
-    ngaysudung: string,
-    ngayxuatve: string,
-    tinhtrangsudung: string,
-    congcheckin: string
-
-}
-
-const ChangeTicket = ({ showModal, setShowModal }: any) => {
-    const [tickets, setTickets] = useState<Ticket[]>([]);
-    // const usersCollectionRef = collection(db, "ticketlist");
-    // const getTickets = async () => {
-    //     const res = await getDocs(usersCollectionRef).then((res) => {
-    //         setTickets(res.docs.map((doc: any) => ({ ...doc.data(), key: doc.id })));
-    //     });
-    // };
-    // useEffect(() => {
-    //     getTickets();
-    // }, []);
+import { db } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 
+const ChangeTicket = (props: any) => {
 
-    const handleOk = () => {
-        setShowModal(false);
-    };
+    const [newDueDate, setNewDueDate] = useState("")
+
+    const ChangeDate = async (id: string, ngayxuatve: string) => {
+        const ticketDoc = doc(db, "ticketlist", id)
+        const newFields = { ngayxuatve: newDueDate }
+        await updateDoc(ticketDoc, newFields);
+        console.log("update successful")
+        props.setShowModal(false);
+        window.location.reload();
+    }
+
 
     const handleCancel = () => {
-        setShowModal(false);
+        props.setShowModal(false);
     };
 
     return (
 
-        <Modal visible={showModal} closable={false} footer={null} onCancel={handleCancel} width={800} >
+        <Modal visible={props.showModal} closable={false} footer={null} onCancel={handleCancel} width={800} >
             <div className='change-container'>
                 <h1 className='change-title'>Đổi ngày sử dụng vé</h1>
                 <label className='change-tenve'>Số vé</label>
-                <input className='change-tenve-label' type="text" disabled />
+                <input className='change-tenve-label' placeholder={props.id} type="text" disabled />
                 <label className='change-sove'>Số vé</label>
-                <input className='change-sove-label' type="text" disabled />
+                <input className='change-sove-label' placeholder={props.sove} type="text" disabled />
                 <label className='change-tensukien'>Tên sự kiện</label>
                 <input className='change-tensukien-label' type="text"
-                    // value={tickets.id} 
+                    placeholder={props.tensukien}
                     disabled />
                 <label className='change-hansudung'>Hạn sử dụng</label>
                 <div className='change-date'>
-                    <Celendar format='DD/MM/YY' />
+                    <Celendar format='DD/MM/YYYY' endday={setNewDueDate} />
                 </div>
                 <div className='buttonchange-holder'>
                     <button className='buttonchange-huy' onClick={handleCancel}>Hủy</button>
-                    <button className='buttonchange-luu' onClick={handleOk}>Lưu</button>
+                    <button className='buttonchange-luu' onClick={() => ChangeDate(props.ticketID, newDueDate)}>Lưu</button>
                 </div>
             </div>
         </Modal>

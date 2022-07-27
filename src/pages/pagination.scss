@@ -1,51 +1,63 @@
-.ant-pagination {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
-  font-variant: tabular-nums;
-  line-height: 1.5715;
-  list-style: none;
-  font-feature-settings: "tnum", "tnum";
+.paginate {
   position: absolute;
-  margin-left: 650px;
-}
+  width: 228px;
+  height: 20px;
+  left: 50%;
+  bottom: 5%;
 
-.ant-pagination-item-active a {
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: #ff993c;
 }
+.items-page {
+  position: relative;
+  width: 8px;
+  height: 16px;
+  right: 500%;
+  top: -2px;
+  margin: 6px;
 
-.ant-pagination-item-active {
-  font-weight: 500;
-  background: #fff;
-  border-color: #ff993c;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #1e0d03;
 }
+.items-page:hover {
+  box-sizing: border-box;
 
-.anticon svg {
-  display: inline-block;
-  color: #ff993c;
+  position: relative;
+  width: 8px;
+  height: 16px;
+  right: 355%;
+  top: -2px;
+  padding: 0px 12px 15px 3px;
+
+  border: 1px solid #ff993c;
+  border-radius: 4px;
 }
+.items-page:focus {
+  box-sizing: border-box;
+  padding: 0px 12px 15px 3px;
+  gap: 10px;
 
-.ant-pagination-item {
-  display: inline-block;
-  min-width: 32px;
-  height: 32px;
-  margin-right: 8px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  line-height: 30px;
-  text-align: center;
-  vertical-align: middle;
-  list-style: none;
-  background-color: #fff;
-  // border: 1px solid #ff993c;
-  // border-radius: 2px;
-  outline: 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  position: relative;
+  width: 8px;
+  height: 16px;
+  left: -40%;
+  top: -2px;
+
+  border: 1px solid #ff993c;
+  border-radius: 4px;
+}
+.links-page {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  top: -21.5px;
+  left: 43%;
+  color: black;
 }

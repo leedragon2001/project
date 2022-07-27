@@ -7,6 +7,10 @@ import Celendar from "../home/celendar";
 import moment from "moment";
 import Paginate from "../pagination";
 import { CSVLink } from 'react-csv'
+import next from '../../assets/next.png'
+import back from '../../assets/back.png'
+
+
 interface Ticket {
     stt: number;
     sove: string;
@@ -25,6 +29,20 @@ const Checkticket = () => {
     const [filterResult, setFilterResult] = useState<Ticket[]>([]);
     const [applicableDate, setApplicableDate] = useState();
     const [dueDate, setDueDate] = useState();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const Pagination = ((pageNumber: any) => setCurrentPage(pageNumber));
+    const btnBack = ((pageNumber: any) => { if (currentPage > 1) { setCurrentPage(currentPage - 1) } });
+    const btnNext = ((pageNumber: any) => { if (currentPage < pageNumbers.length) { setCurrentPage(currentPage + 1) } });
+    const [PerPage] = useState(10);
+    const pageNumbers = [];
+
+    const indexOfLastPost = currentPage * PerPage;
+    const indexOfFirstPost = indexOfLastPost - PerPage;
+    const currentTickets = tickets.slice(indexOfFirstPost, indexOfLastPost);
+    for (let i = 1; i <= Math.ceil(tickets.length / PerPage); i++) {
+        pageNumbers.push(i);
+    }
 
     const getTickets = async () => {
         const res = await getDocs(usersCollectionRef).then((res) => {
@@ -148,8 +166,28 @@ const Checkticket = () => {
                             </td>
                         </tr>
                     ))}
-                    <Paginate />
                 </table>
+                <div className='pagination'>
+
+                    {pageNumbers.map(number => (
+                        <div>
+                            <button className="back-check" onClick={() => btnBack(number)}>
+                                <img src={back} alt="back" />
+                            </button>
+
+                            <div key={number} className='items-page' onClick={() => Pagination(number)} >
+                                <a className='links-page-check'>
+                                    {number}
+                                </a>
+                            </div>
+
+                            <button className="next-check" onClick={() => btnNext(number)}>
+                                <img src={next} alt="next" />
+                            </button>
+                        </div>
+                    ))}
+
+                </div>
             </div>
 
             <div className="checkticket-body-right">
@@ -197,8 +235,7 @@ const Checkticket = () => {
                     <label className="checkticket-fromdate-filter-label">Từ ngày</label>
                     <div className="checkticket-fromdate-filter-input">
                         <Celendar format="DD/MM/YY"
-                        // setApplicableDate={setApplicableDate}
-                        // StartDate={StartDate}
+                            startday={setApplicableDate}
                         />
                     </div>
                 </div>
@@ -206,8 +243,7 @@ const Checkticket = () => {
                     <label className="checkticket-todate-filter-label">Đến ngày</label>
                     <div className="checkticket-todate-filter-input">
                         <Celendar format="DD/MM/YY"
-                        // setDueDate={setDueDate}
-                        // EndDate={EndDate}
+                            endday={setDueDate}
                         />
                     </div>
                 </div>
