@@ -162,7 +162,7 @@ const Ticketmanagement = () => {
     useEffect(() => {
         setFilterResult(filterState);
         setTickets([])
-        console.log(filterState)
+        // console.log(filterState)
     }, [filterState])
 
     return (
@@ -198,7 +198,7 @@ const Ticketmanagement = () => {
                         <th></th>
                     </tr>
                     {!filterState && search &&
-                        filterResult.map((ticket) =>
+                        currentTickets.map((ticket) =>
                             <tr className="ticketmanagement-table-content">
                                 <td>{ticket.stt}</td>
                                 <td>{ticket.id}</td>
@@ -338,7 +338,6 @@ const Ticketmanagement = () => {
                             </button>
                         </div>
                     ))}
-
                 </div>
             </div>
         </div>

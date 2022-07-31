@@ -9,6 +9,8 @@ import Paginate from "../pagination";
 import { CSVLink } from 'react-csv'
 import next from '../../assets/next.png'
 import back from '../../assets/back.png'
+import isBefore from 'date-fns/isBefore'
+import isAfter from 'date-fns/isAfter'
 
 
 interface Ticket {
@@ -27,8 +29,13 @@ const Checkticket = () => {
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const usersCollectionRef = collection(db, "checklist");
     const [filterResult, setFilterResult] = useState<Ticket[]>([]);
-    const [applicableDate, setApplicableDate] = useState();
-    const [dueDate, setDueDate] = useState();
+    const [applicableDate, setApplicableDate] = useState('');
+    const [dueDate, setDueDate] = useState('');
+    const [filterDayResult, setFilterDayResult] = useState<Ticket[]>([]);
+    var chooseapplicableDate
+    var choosedueDate
+    var chooseapplicableMonth
+    var choosedueMonth
 
     const [currentPage, setCurrentPage] = useState(1);
     const Pagination = ((pageNumber: any) => setCurrentPage(pageNumber));
@@ -65,13 +72,28 @@ const Checkticket = () => {
     }, [search]);
 
     const Filter = () => {
-        if (status === "Tất cả") {
-            setFilterResult(tickets);
-        }
-        else {
-            let result = tickets;
-            setFilterResult(result.filter((value) => value.tinhtrangve === status));
-        }
+        setFilterResult([])
+        setFilterDayResult([])
+
+
+        tickets.filter(value => {
+            if (isAfter(new Date(2022, Number(value.ngaysudung.slice(3, 5)) - 1, Number(value.ngaysudung.slice(0, 2))), new Date(2022, Number(applicableDate.slice(3, 5)) - 1, Number(applicableDate.slice(0, 2)))) && isBefore(new Date(2022, Number(value.ngaysudung.toString().slice(3, 5)) - 1, Number(value.ngaysudung.toString().slice(0, 2))), new Date(2022, Number(dueDate.slice(3, 5)) - 1, Number(dueDate.slice(0, 2))))) {
+                filterDayResult.push(value)
+                console.log(filterDayResult)
+            }
+        })
+
+        filterDayResult.filter(value => {
+            if (status === "Tất cả") {
+                setFilterResult(filterDayResult)
+                console.log(filterResult)
+            }
+            else if (value.tinhtrangve === status) {
+                // let result = filterResult;
+                setFilterResult((filterResult: any) => [...filterResult, value]);
+            }
+        })
+
     };
 
     const NotChanged = {
@@ -168,25 +190,21 @@ const Checkticket = () => {
                     ))}
                 </table>
                 <div className='pagination'>
-
+                    <button className="back-check" onClick={() => btnBack(currentPage)}>
+                        <img src={back} alt="back" />
+                    </button>
                     {pageNumbers.map(number => (
                         <div>
-                            <button className="back-check" onClick={() => btnBack(number)}>
-                                <img src={back} alt="back" />
-                            </button>
-
                             <div key={number} className='items-page' onClick={() => Pagination(number)} >
                                 <a className='links-page-check'>
                                     {number}
                                 </a>
                             </div>
-
-                            <button className="next-check" onClick={() => btnNext(number)}>
-                                <img src={next} alt="next" />
-                            </button>
                         </div>
                     ))}
-
+                    <button className="next-check" onClick={() => btnNext(currentPage)}>
+                        <img src={next} alt="next" />
+                    </button>
                 </div>
             </div>
 

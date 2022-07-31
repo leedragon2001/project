@@ -115,7 +115,7 @@ const Setting = () => {
     useEffect(() => {
         if (search === "") setFilterResult(tickets);
         setFilterResult((prev) =>
-            prev.filter((e) => e.magoi.toLowerCase().includes(search.toLowerCase()))
+            prev.filter((e) => e.tengoive.toLowerCase().includes(search.toLowerCase()))
         );
     }, [search]);
 
@@ -179,7 +179,26 @@ const Setting = () => {
                         <th></th>
                     </tr>
 
-                    {filterResult.map((ticket) =>
+                    {!search && currentTickets.map((ticket) =>
+                        <tr className="setting-table-content" key={ticket.id}>
+                            <td>{ticket.stt}</td>
+                            <td>{ticket.magoi}</td>
+                            <td>{ticket.tengoive}</td>
+                            <td>{ticket.ngayapdung}</td>
+                            <td>{ticket.ngayhethan}</td>
+                            <td>{ticket.giave} VNĐ</td>
+                            <td>{ticket.giacombo} VNĐ / {ticket.sove} vé</td>
+                            <td className='setting-tinhtrang'>
+                                {ticket.tinhtrang.includes("Đang áp dụng") &&
+                                    <Typography style={applying}><img src={green} alt={green} /> {ticket.tinhtrang}</Typography>}
+                                {ticket.tinhtrang.includes("Tắt") &&
+                                    <Typography style={off}><img src={red} alt={red} /> {ticket.tinhtrang}</Typography>}
+                            </td>
+                            <td><button className='setting-button-update' onClick={() => { FilterUpdate(ticket.id, ticket.magoi, ticket.tengoive, ticket.ngayapdung, ticket.ngayhethan, ticket.giave, ticket.giacombo, ticket.sove, ticket.tinhtrang,) }}><img src={edit} alt={edit} />Cập nhật</button></td>
+
+                        </tr>
+                    )}
+                    {search && filterResult.map((ticket) =>
                         <tr className="setting-table-content" key={ticket.id}>
                             <td>{ticket.stt}</td>
                             <td>{ticket.magoi}</td>
@@ -214,24 +233,19 @@ const Setting = () => {
 
                 </table>
                 <div className='pagination'>
-
+                    <button className="back-setting" onClick={() => btnBack(currentPage)}>
+                        <img src={back} alt="back" />
+                    </button>
                     {pageNumbers.map(number => (
-                        <div>
-                            <button className="back-setting" onClick={() => btnBack(number)}>
-                                <img src={back} alt="back" />
-                            </button>
-
-                            <div key={number} className='items-page-setting' onClick={() => Pagination(number)} >
-                                <a className='links-page-setting'>
-                                    {number}
-                                </a>
-                            </div>
-
-                            <button className="next-setting" onClick={() => btnNext(number)}>
-                                <img src={next} alt="next" />
-                            </button>
-                        </div>
+                        <span key={number} className='items-page-setting' onClick={() => Pagination(number)} >
+                            <a className='links-page-setting'>
+                                {number}
+                            </a>
+                        </span>
                     ))}
+                    <button className="next-setting" onClick={() => btnNext(currentPage)}>
+                        <img src={next} alt="next" />
+                    </button>
 
                 </div>
             </div>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { Gates } from "./gate";
+
 import './filterticket.scss'
 import { Button, Modal } from "antd";
 import Celendar from '../home/celendar'
 import 'antd/dist/antd.css';
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-
+import isBefore from 'date-fns/isBefore'
+import isAfter from 'date-fns/isAfter'
 
 interface Ticket {
 
@@ -28,11 +29,12 @@ const FilterTicket = (props: any) => {
     const [dueDate, setDueDate] = useState('');
     const [allCheck, setAllCheck] = useState<boolean>(false);
     const [check, setCheck] = useState<string[]>([]);
-    const [list, setList] = useState([""]);
+    const [list, setList] = useState<string[]>([]);
     const [selectedOption, setSelectedOption] = useState();
     const [status, setSatus] = useState();
-    const [gate, setGate] = useState()
     const [filterResult, setFilterResult] = useState<Ticket[]>([]);
+    const [filterDayResult, setFilterDayResult] = useState<Ticket[]>([]);
+
 
     const usersCollectionRef = collection(db, "ticketlist");
     useEffect(() => {
@@ -45,11 +47,6 @@ const FilterTicket = (props: any) => {
     }, []);
 
 
-
-    useEffect(() => {
-        setList(Gates);
-    }, [list]);
-
     const handleSelect = (e: any) => {
         setAllCheck(!allCheck);
         setCheck(list.map((li: any) => li));
@@ -58,11 +55,16 @@ const FilterTicket = (props: any) => {
             setCheck([
                 "Cổng 1", "Cổng 2", "Cổng 3", "Cổng 4", "Cổng 5"
             ]);
-            console.log(check)
+            // console.log(check)
         }
 
 
     };
+
+    // useEffect(() => {
+    //     console.log(applicableDate, dueDate)
+    // }, [applicableDate, dueDate])
+
 
     const handleClick = (e: any) => {
         const { id, checked } = e.target;
@@ -70,28 +72,38 @@ const FilterTicket = (props: any) => {
         if (!checked) {
             setCheck(check.filter(item => item !== id));
         }
+        // console.log(check)
     };
 
 
-    useEffect(() => {
-        console.log(applicableDate)
-    }, [applicableDate])
+    // useEffect(() => {
+    //     console.log(applicableDate)
+    // }, [applicableDate])
 
     const handleCancel = () => { props.setOpenModal(false) };
 
     const Filter = () => {
         setFilterResult([])
+        setFilterDayResult([])
         props.setParent([])
-        console.log(check.length)
         tickets.filter(value => {
+            if (isAfter(new Date(2022, Number(value.ngaysudung.slice(3, 5)) - 1, Number(value.ngaysudung.slice(0, 2))), new Date(2022, Number(applicableDate.slice(3, 5)) - 1, Number(applicableDate.slice(0, 2)))) && isBefore(new Date(2022, Number(value.ngaysudung.toString().slice(3, 5)) - 1, Number(value.ngaysudung.toString().slice(0, 2))), new Date(2022, Number(dueDate.slice(3, 5)) - 1, Number(dueDate.slice(0, 2))))) {
+                filterDayResult.push(value)
+                console.log(filterDayResult)
+            }
+        })
+
+
+        filterDayResult.filter(value => {
             if (status === "Tất cả" && check.length >= 5) {
-                setFilterResult(tickets)
-                props.setParent(tickets)
+                filterResult.push(value)
+                console.log(filterResult)
+                props.setParent(filterResult)
             } else if (status === "Tất cả" && check.length !== 5) {
                 check.filter((id) => {
                     {
                         if (id === value.congcheckin) {
-                            props.setParent((tickets: any) => [...tickets, value])
+                            props.setParent((filterResult: any) => [...filterResult, value])
                             console.log(value)
                         }
                     }
@@ -99,7 +111,7 @@ const FilterTicket = (props: any) => {
             } else if (status !== "Tất cả" && value.tinhtrangsudung === status) {
                 check.filter((id) => {
                     if (id === value.congcheckin) {
-                        props.setParent((tickets: any) => [...tickets, value])
+                        props.setParent((filterResult: any) => [...filterResult, value])
                         console.log(value)
                     }
                 })
